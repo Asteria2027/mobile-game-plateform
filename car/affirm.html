@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>确认订单</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maxinum-scale=1.0,mininum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="./reset.css">
+    <style type="text/css">
+    #affirm {
+        width: 100%;
+        overflow: hidden;
+        font-family: helvetica;
+        font-size: 0.16rem;
+    }
+
+    #affirm .title {
+        position: relative;
+        height: 0.45rem;
+        line-height: 0.45rem;
+        width: 100%;
+        text-align: center;
+        background: #e7384a;
+        font-size: 0.25rem;
+        color: #fff;
+    }
+
+    #affirm .iconBack {
+        position: absolute;
+        top: 0;
+        left: 0.05rem;
+        width: 0.25rem;
+        height: 100%;
+        background: url("../images/exchange/return.png") no-repeat center left;
+    }
+
+    #affirm .affirm-content {}
+
+    #affirm .affirm-main-top {
+        width: 92%;
+        height: 1.3rem;
+        background: #f7f7f9;
+        margin: 0 auto;
+        overflow: hidden;
+        display: flex;
+        padding-top: 0.1rem;
+    }
+
+    #affirm .affirm-main-top .affirm-pic {
+        flex: 1;
+        margin-top: 0.1rem;
+        margin-left: 0.1rem;
+    }
+
+    #affirm .affirm-main-top .affirm-pic img {
+        width: 100%;
+    }
+
+    #affirm .affirm-main-top .affirm-des {
+        flex: 2;
+        margin-top: 0.1rem;
+        line-height: 0.3rem;
+        padding-left: 0.2rem;
+    }
+
+    #affirm .affirm-main-top .affirm-des-title {
+        font-size: 0.18rem;
+    }
+
+    #affirm .affirm-main-top .affirm-jf {
+        color: #e7354a;
+    }
+
+    #affirm .affirm-jian {
+        width: 0.45rem;
+	    float: left;
+	    height: 0.38rem;
+	    display: inline-block;
+	    line-height: 0.38rem;
+	    background-color: #fff;
+	    text-align: center;
+	    font-size: 0.14rem;
+	    color: #1c1c1c;
+	}
+
+    #affirm .affirm-jia {
+        width: 0.45rem;
+	    float: left;
+	    height: 0.38rem;
+	    display: inline-block;
+	    line-height: 0.38rem;
+	    background-color: #fff;
+	    text-align: center;
+	    font-size: 0.14rem;
+	    color: #1c1c1c;
+	}
+
+
+    #affirm .affirm-count {
+       margin: 0 0.05rem;
+       width: 0.45rem;
+	    float: left;
+	    height: 0.38rem;
+	    display: inline-block;
+	    line-height: 0.38rem;
+	    background-color: #fff;
+	    text-align: center;
+	    font-size: 0.14rem;
+	    color: #1c1c1c;
+    }
+
+    #affirm .affirm-content ul li {
+        height: 0.4rem;
+        line-height: 0.4rem;
+        padding: 0.08rem;
+        padding-left: 0.1rem;
+        border-bottom: 1px solid #F5F5F5;
+    }
+
+    #affirm .affirm-content ul li div i:nth-child(1) {
+        color: #e7354a;
+        margin-right: 0.15rem;
+    }
+
+    #affirm .phonehint {
+        color: #b4b4b4;
+    }
+
+    #affirm .affirm-content ul li div {
+        float: left;
+        width: 55%;
+    }
+
+    #affirm .number1 {
+        float: right;
+        width: 40%;
+        height: 100%;
+    }
+
+    #affirm .number2 {
+        float: right;
+        width: 40%;
+        height: 100%;
+    }
+
+    #affirm .total {
+        float: right;
+    }
+
+    #affirm .total-jf {
+        color: #e7384a;
+    }
+
+    #affirm .gouxuan {
+        display: inline-block;
+        float: left;
+        height: 0.4rem;
+        width: 0.4rem;
+        background: url(../images/my/my11.png) no-repeat center center/ 0.3rem 0.3rem;
+        margin-right: 0.1rem;
+    }
+
+    #affirm .gouxuan.sele {
+        display: inline-block;
+        float: left;
+        height: 0.4rem;
+        width: 0.4rem;
+        background: url(../images/gouxuan.png) no-repeat center center/ 0.3rem 0.3rem;
+        margin-right: 0.1rem;
+    }
+
+    #affirm .affirm-buttom {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 0.45rem;
+        line-height: 0.45rem;
+        background-color: #f7f7f9;
+        font-size: 0.16rem;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    #affirm .affirm-buttom-jf {
+        color: #e7384a;
+    }
+
+    #affirm .affirm-submit {
+        display: inline-block;
+        height: 0.45rem;
+        width: 1rem;
+        text-align: center;
+        background-color: #e7384a;
+        color: #fff;
+    }
+    .exchangeFail {
+      position: fixed;
+      z-index: 100;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+    }
+    .fail-content {
+      height: 2.65rem;
+      width: 3.31rem;
+      margin: auto;
+      position: absolute;
+      background-color: #fff;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: 15px;
+      text-align: center;
+    }
+    .fail-title {
+      height: 1.09rem;
+      position: relative;
+    }
+    .fail-title .fail-icon {
+      height: 0.77rem;
+      width: 100%;
+      display: inline-block;
+      margin-top: -0.15rem;
+      background-image: url("./err.png");
+      background-position: center;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+    }
+    .fail-title .fail-icon {
+      height: 0.77rem;
+      width: 100%;
+      display: inline-block;
+      margin-top: -0.15rem;
+      background-image: url("./err.png");
+      background-position: center;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+    }
+
+    .fail-title .fail-sorry {
+      color: #ffa508;
+      height: 0.38rem;
+      line-height: 0.38rem;
+      font-size: 0.16rem;
+      font-weight: 900;
+    }
+    .fail-title .fail-close {
+      display: block;
+      position: absolute;
+      top:0.1rem;
+      right: 0.1rem;
+      height: 0.25rem;
+      width: 0.25rem;
+      background: url("./xx.png") no-repeat center /100%;
+    }
+    .fail-notic {
+      height: 1.56rem;
+      background-color: #ffa508;
+      border-top: 1px dashed #fff;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+
+    .fail-notic .faile-name {
+      height: 0.5rem;
+      line-height: 0.5rem;
+      font-size: 0.18rem;
+      color: #fff;
+    }
+
+    .fail-notic .faile-buttom {
+      width: 80%;
+      height: 0.51rem;
+      line-height: 0.51rem;
+      margin: 0 auto;
+      background-color: #fff;
+      color: #e7374b;
+      font-size: 0.2rem;
+      border-radius: 25px;
+    }
+    .exchangeSuccess {
+      position: fixed;
+      z-index: 100;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      text-align: center;
+      display: none;
+    }
+
+    .success-content {
+      height: 2.65rem;
+      width: 3.31rem;
+      margin: auto;
+      position: absolute;
+      background-color: #fff;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: 15px;
+      text-align: center;
+    }
+
+    .success-content .success-title {
+      height: 1.09rem;
+    }
+
+    .success-content .success-title .success-icon {
+      height: 0.77rem;
+      width: 100%;
+      display: inline-block;
+      margin-top: -0.15rem;
+      background-image: url("./succeed.png");
+      background-position: center;
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+    }
+
+    .success-content .success-title .success-sorry {
+      color: #e7374b;
+      height: 0.38rem;
+      line-height: 0.38rem;
+      font-size: 0.16rem;
+      font-weight: 900;
+    }
+
+    .success-content .success-notic {
+      height: 1.56rem;
+      background-color: #e7374b;
+      border-top: 1px dashed #fff;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+
+    .success-content .success-notic .success {
+      font-size: 0.18rem;
+      color: #fff;
+      margin-top: 0.05rem;
+    }
+
+    .success-content .success-notic .success-name {
+      height: 0.5rem;
+      line-height: 0.5rem;
+      font-size: 0.18rem;
+      color: #fff;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .success-content .success-notic .success-buttom {
+      width: 80%;
+      height: 0.51rem;
+      line-height: 0.51rem;
+      margin: 0 auto;
+      background-color: #fff;
+      color: #e7374b;
+      font-size: 0.2rem;
+      border-radius: 25px;
+    }
+    .affirm-hint {
+        padding: 0.1rem 0.1rem;
+        line-height: 0.2rem;
+        background: #e7384a;
+        word-wrap: break-word;
+        border-radius: 0.1rem;
+        color: #fff;
+        font-size: 0.14rem;
+        margin: auto;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        min-width: 40%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        display: none;
+    }
+    </style>
+    <script type="text/javascript" src="reset.js"></script>
+    <script type="text/javascript" src="zepto.min.js"></script>
+</head>
+
+<body>
+    <div id="affirm">
+        <div class="title">
+            <i class="iconBack"></i>
+            <h3>确认订单</h3>
+        </div>
+        <div class="affirm-content">
+            <div class="affirm-main-top">
+                <div class="affirm-pic"><img src=""></div>
+                <div class="affirm-des">
+                    <p class="affirm-des-title"></p>
+                    <p class="affirm-jf"></p>
+                    <p><span class="affirm-jian">-</span><span class="affirm-count">1</span><span class="affirm-jia">+</span></p>
+                </div>
+            </div>
+            <ul>
+                <li>
+                    <div>
+                        <i>*</i>
+                        <span class="phonehint">请输入您的手机号:</span>
+                    </div>
+                    <input type="number" name="" class="number1" maxlength="11" onkeypress="javascript:if(event.keyCode == 32)event.returnValue = false;">
+                </li>
+                <li>
+                    <div>
+                        <i>*</i>
+                        <span class="phonehint">再次输入您的手机号：</span>
+                    </div>
+                    <input type="number" name="" class="number2" maxlength="11" onkeypress="javascript:if(event.keyCode == 32)event.returnValue = false;">
+                </li>
+                <li>
+                    <p class="total">
+                        <span>共1件商品</span>
+                        <span>小计：</span>
+                        <span class="total-jf">451</span>
+                    </p>
+                </li>
+                <li>
+                    <span class="gouxuan"></span>
+                    <div>
+                        <span>同意</span>
+                        <span>《玩一下兑换协议》</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="affirm-buttom">
+            <div>
+                <span>共
+                    <span class="affirm-buttom-count">1</span> 件合计：
+                <span class="affirm-buttom-jf">1212</span>
+                </span>
+                <span class="affirm-submit">确定</span>
+            </div>
+        </div>
+      <div class="exchangeFail" >
+        <div class="fail-content">
+          <div class="fail-title">
+            <span class="fail-icon"></span>
+            <span class="fail-sorry">对不起</span>
+            <span class="fail-close"></span>
+          </div>
+          <div class="fail-notic">
+            <div class="faile-name"></div>
+            <div class="faile-buttom">去赚乐盈券</div>
+          </div>
+        </div>
+      </div>
+      <div class="exchangeSuccess">
+        <div class="success-content">
+          <div class="success-title">
+            <span class="success-icon"></span>
+            <span class="success-sorry">恭喜您</span>
+          </div>
+          <div class="success-notic">
+            <div class="success">兑换成功</div>
+            <div class="success-name"></div>
+            <div class="success-buttom" >确定</div>
+          </div>
+        </div>
+      </div>
+        <div class="affirm-hint"></div>
+    </div>
+    <script type="text/javascript">
+		var Requres = new UrlSearch();
+    $(".faile-buttom").on("click",function(){
+      $(".exchangeFail").hide()
+      sessionStorage.setItem("dJ",window.location.href)
+      window.location.href = 'http://m.game.13322.com/exchange';
+    })
+    $(".success-buttom").on("click",function(){
+      $(".exchangeSuccess").hide()
+      $(".collectionOfShade").hide()
+      window.location.href=sessionStorage.getItem("car")
+    })
+    $(".fail-close").on("click",function(){
+      $(".exchangeFail").hide()
+      $(".collectionOfShade").hide()
+    })
+    $(".exchangeFail").on("click",function(){
+      $(".exchangeFail").hide()
+      $(".collectionOfShade").hide()
+    })
+    var goodsID = Requres.goodsId;
+    var userId = Requres.userId;
+
+    $.ajax({
+        type: 'GET',
+        url: '/api/pointShopGoods/getGoodsInfo',
+        data: {
+            country: 0,
+            id: goodsID
+        },
+        success: function(data) {
+            if (data.result == 0) {
+                // console.log(data);
+                if (data.data.needScoreId == 3) {
+                    var unit = '积分';
+                } else if (data.data.needScoreId == 2) {
+                    var unit = '乐盈券';
+                }
+                $('.affirm-pic img').attr('src', data.data.picUrl);
+                $('.affirm-des-title').html(data.data.name);
+                $('.affirm-jf').html(data.data.needScore + unit);
+				var count="";
+				if (sessionStorage.getItem("num")) {
+					 count =sessionStorage.getItem("num")
+					$('.affirm-count').html(count)
+				}else{
+					 count= Number($('.affirm-count').html());
+				}
+                var affirmJf = data.goods.needScore * count;
+                var isGoxuan = false;
+
+                $('.total-jf').html(affirmJf + unit);
+                $('.affirm-buttom-jf').html(affirmJf + unit);
+
+                $('.affirm-jia').on('click', function() {
+                    count++;
+                    sessionStorage.setItem("num",count)
+                    affirmJf = data.goods.needScore * count;
+                    $('.affirm-count').html(count);
+                    $('.total-jf').html(affirmJf + unit);
+                    $('.affirm-buttom-jf').html(affirmJf + unit);
+                });
+                $('.affirm-jian').on('click', function() {
+                    if (count > 1) {
+                        count--;
+                        sessionStorage.setItem("num",count)
+                        affirmJf = data.goods.needScore * count;
+                        $('.affirm-count').html(count);
+                        $('.total-jf').html(affirmJf + unit);
+                        $('.affirm-buttom-jf').html(affirmJf + unit);
+                    }
+                });
+                $('.gouxuan').on('click', function() {
+                    if ($(this).hasClass('sele')) {
+                        $(this).removeClass('sele');
+                        isGoxuan = false;
+                    } else {
+                        $(this).addClass('sele');
+                        isGoxuan = true;
+                    }
+                })
+
+                $('.affirm-submit').on('click', function() {
+                    if (isGoxuan == false) {
+                        $('.affirm-hint').html('请勾选《玩一下兑换协议》').css({
+                            display: 'block'
+                        });
+                        setTimeout(function() {
+                            $('.affirm-hint').css({
+                                display: 'none'
+                            });
+                        }, 1500);
+                    } else {
+                        var num1 = $('.number1').val();
+                        var num2 = $('.number2').val();
+                        if (num1 == "" || num2 == "") {
+                            $('.affirm-hint').html('请输入您的手机号码').css({
+                                display: 'block'
+                            });
+                            setTimeout(function() {
+                                $('.affirm-hint').css({
+                                    display: 'none'
+                                });
+                            }, 1500);
+                        } else if (num1 != num2) {
+                            $('.affirm-hint').html('两次输入的手机号码不一致').css({
+                                display: 'block'
+                            });
+                            setTimeout(function() {
+                                $('.affirm-hint').css({
+                                    display: 'none'
+                                });
+                            }, 1500);
+                        } else if (!(/^1(3|4|5|7|8)\d{9}$/.test(num1))) {
+                            $('.affirm-hint').html('请输入正确的手机号码').css({
+                                display: 'block'
+                            });
+                            setTimeout(function() {
+                                $('.affirm-hint').css({
+                                    display: 'none'
+                                });
+                            }, 1500);
+                        } else {
+                            $.ajax({
+                                type : 'GET',
+                                url : '/api/pointShopGoods/exchangeGoods',
+                                data:{
+                                    country:0,
+                                    goodsId:goodsID,
+                                    userId:userId,
+                                    phone:num1,
+                                    count:count
+                                },
+                                success:function(res){
+                                    if(res.result==0){
+                                        $(".exchangeSuccess").show()
+                                    }else if(res.result==76){
+                                      $(".exchangeFail").show();
+                                      $(".faile-name").html("库存不足")
+                                    }else{
+                                      $(".exchangeFail").show();
+                                      $(".faile-name").html(res.msg)
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        }
+    });
+
+    $(".iconBack").on("click",function(){
+    	window.location.href=sessionStorage.getItem("car")
+    })
+    </script>
+</body>
+
+</html>

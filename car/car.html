@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="玩一下是专业网页游戏联运平台，主要提供精品网页游戏的运营和推广，玩一下立足玩家需求，为中国游戏玩家提供最全、最酷、最热门的精品游戏，致力于做玩家最爱、最信任的游戏平台，玩家可赚取积分换礼品，注册成为新用户更有丰富豪礼相送!"/>
+		<meta name="keywords" content="玩一下,热门游戏,网页游戏大全"/>
+		<title>商城</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maxinum-scale=1.0,mininum-scale=1.0,user-scalable=no">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+		<script src="reset.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../lib/swiper/swiper-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../lib/jquery/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/swiper-3.4.0.min.css"/>
+		<link rel="stylesheet" type="text/css" href="car.css"/>
+		<link rel="stylesheet" type="text/css" href="reset.css"/>
+	</head>
+	<body>
+		<div class="car">
+			<div class="title"><span class="back"></span>商城<a  class="linkLeying" style="color: #fff">赚乐盈券</a></div>
+			<div class="banner">
+				<div class=" swiper-container1">
+		            <ul class="swiper-wrapper">
+		            </ul>
+	            <div class="swiper-pagination"></div>
+	          </div>
+			</div>
+			<div class="car-top ">
+		        <!-- <div class="active">
+		          <div >
+		            <span class="icon icon-shop"></span>
+		            <span class="name">积分兑换</span>
+		          </div>
+		        </div> -->
+		        <div>
+		          <div>
+		            <span class="icon icon-quan"></span>
+		            <span class="name">乐盈券兑换&nbsp;&nbsp;&nbsp;&nbsp;乐盈券余额：<span class="lyq"></span></span>
+		          </div>
+		        </div>
+	     	</div>
+	     	 <div class="content swiper-container2">
+            <div class="swiper-wrapper">
+              <div class="content-list  swiper-slide">
+                <div class="comtent-title borderBottom-1px">
+                  <span class="icon"></span>
+                  <span class="name">手办周边</span>
+                  <span class="more-icon" onclick="carmore(4)"></span>
+                  <span class="more" onclick="carmore(4)">更多</span>
+                </div>
+                <ul class="car-list">
+
+                </ul>
+                <div class="comtent-title borderBottom-1px">
+                  <span class="icon"></span>
+                  <span class="name">虚拟物品</span>
+                  <span class="more-icon" onclick="carmore(3)"></span>
+                  <span class="more" onclick="carmore(3)">更多</span>
+                </div>
+                <ul class="car-list" >
+
+                </ul>
+              </div>
+              <div class="content-list swiper-slide">
+                <div class="comtent-title borderBottom-1px">
+                  <span class="icon"></span>
+                  <span class="name">虚拟物品</span>
+                  <span class="more-icon" onclick="carmore(3)"></span>
+                  <span class="more" onclick="carmore(3)">更多</span>
+                </div>
+                <ul class="car-list">
+
+                </ul>
+                <div class="comtent-title ">
+                  <span class="icon"></span>
+                  <span class="name">手办周边</span>
+                  <span class="more-icon" onclick="carmore(4)"></span>
+                  <span class="more" onclick="carmore(4)">更多</span>
+                </div>
+                <ul class="car-list">
+
+                </ul>
+              </div>
+            </div>
+
+          </div>
+		</div>
+		<div class="carAlert" ></div><!--提示-->
+		<div class="collectionOfShade"></div><!--遮挡层-->
+		<div class="exchangeOfShade" ></div>
+		<div class="collectEvoke" >
+        <div class="collectEvoke-content">
+          <span class="collectEvoke-content-icon"><img ></span>
+          <span class="collectEvoke-content-title">
+            <span class="collectEvoke-name"></span>
+            <span class="collectEvoke-need">
+              <span></span>
+              <span><span></span></span>
+            </span>
+            <span>库存充足</span>
+          </span>
+        </div>
+        <div class="collectEvoke-buttom" @click="_collect(false)">收藏</div>
+      </div>
+      <div class="exchange" >
+          <div class="exchange-content">
+            <div class="exchange-top">
+              <span class="exchange-icon"><img ></span>
+              <span class="exchange-title">
+                <span class="exchange-name"></span>
+                <span class="exchange-need">
+                  <span></span>
+                  <span><span></span></span>
+                </span>
+                <span>库存充足</span>
+              </span>
+            </div>
+            <div class="exchange-num">
+              <h4>数量选择</h4>
+              <span class="reduce" >-</span>
+              <span></span>
+              <span class="add" >+</span>
+            </div>
+          </div>
+          <div class="exchange-buttom" >兑换</div>
+      </div>
+      <!--//兑换失败-->
+      <div class="exchangeFail" >
+        <div class="fail-content">
+          <div class="fail-title">
+            <span class="fail-icon"></span>
+            <span class="fail-sorry">对不起</span>
+			      <span class="fail-close"></span>
+          </div>
+          <div class="fail-notic">
+            <div class="faile-name">乐盈券不足</div>
+            <div class="faile-buttom">去赚乐盈券</div>
+          </div>
+        </div>
+      </div>
+      <!--//兑换成功-->
+      <div class="exchangeSuccess" v-if="exchangeSuccess">
+        <div class="success-content">
+          <div class="success-title">
+            <span class="success-icon"></span>
+            <span class="success-sorry">恭喜您</span>
+          </div>
+          <div class="success-notic">
+            <div class="success">兑换成功</div>
+            <div class="success-name"></div>
+            <div class="success-buttom" @click="_exchangeSuccess()">确定</div>
+          </div>
+        </div>
+      </div>
+      <div class="fixed">购买记录</div>
+    </div>
+	</body>
+	<script type="text/javascript">
+		var jf="";
+		var quan="";
+		var login=false;
+		var userId="";
+		var Requres = new UrlSearch();
+    if(Requres.Type=="app"||sessionStorage.getItem("Type")){
+        sessionStorage.setItem("Type","app")
+        $(".back").hide()
+    }
+    if(Requres.platformId){
+        sessionStorage.setItem("platformId",Requres.platformId)
+    }
+		if(Requres.deviceId){
+      $.ajax({
+          type:"get",
+          url:"/api/login/tokenLogin",
+          async:true,
+          data:{
+            platformTerminal:4,
+            country:0,
+            token:Requres.token,
+            deviceId:Requres.deviceId
+          },
+          success:function(res){
+            $.ajax({
+              type:"get",
+              url:"/api/user/getUserInfo",
+              async:true,
+              data:{
+                country:0,
+              },
+              success:function(res){
+                userId=res.user.userId;
+                jf=res.jf;
+                quan=res.lyq;
+                $('.lyq').html(quan);
+                userId=res.user.userId
+                if(res.result==0){
+                  login=true;
+                }
+              },
+              error:function(){
+
+              }
+            });
+
+          },
+          error:function(){
+
+          }
+        });
+    }else{
+      $.ajax({
+        type:"get",
+        url:"/api/user/getUserInfo",
+        async:true,
+        data:{
+          country:0,
+        },
+        success:function(res){
+          jf=res.jf;
+          quan=res.lyq;
+          $('.lyq').html(quan);
+          userId=res.user.userId
+          if(res.result==0){
+            login=true;
+          }
+        },
+        error:function(){
+
+        }
+      });
+    }
+		if (Requres.url) {
+			sessionStorage.setItem("url",decodeURIComponent(Requres.url))
+		}
+    $(".fixed").on("click",function () {
+      sessionStorage.setItem("fixed",window.location.href)
+      window.location.href="http://m.game.13322.com/conversion";
+    })
+		$.ajax({
+			type:"get",
+			url:"/api/pointShopGoods/getRotationInfo",
+			async:true,
+			data:{
+				country:0,
+        platformTerminal:4,
+        platform:4
+			},
+			success:function(res){
+				for (var i=0;i<res.data.list.length;i++) {
+					var li="<li class='swiper-slide'  data-url="+res.data.list[i].linkUrl+"><img src="+res.data.list[i].imageUrl+"></li>";
+					$(".swiper-container1 .swiper-wrapper").append(li);
+				}
+				setTimeout(function(){
+					var mySwiper1 = new Swiper('.swiper-container1', {
+		              loop: true,
+		              pagination: '.swiper-pagination',
+		              autoplay: 4000
+		            })
+				})
+			},
+			error:function(){
+
+			}
+		});
+		$(".swiper-container1").on("click",".swiper-slide",function () {
+		    if($(this).attr("data-url")!="http://m.game.13322.com"){
+          window.location.href=$(this).attr("data-url")
+        }
+    })
+//		function carBanner() {
+//      window.location.href=$(this).attr("data-url")
+//    }
+		var currency=[' ',' ','乐盈券','积分'];
+		var mySwiper2="";
+		$.ajax({
+			type:"get",
+			url:"/api/pointShopGoods/getAllGoods",
+			async:true,
+			data:{
+				country:0,
+        platform:4,
+				pageSize:50,
+				enable:0
+			},
+			success:function(res){
+				for(var i=0;i<res.data.list.length;i++){
+	              if (res.data.list[i].type==1){
+	                    if (res.data.list[i].needScoreId==2){
+	                    	var li="<li><dl><dt><img src="+res.data.list[i].picUrl+"></dt><dd><p>"+res.data.list[i].name+"</p><p><span>"+res.data.list[i].needScore+currency[res.data.list[i].needScoreId]+"</span><span><b>市场价:"+res.data.list[i].price+"元</b></span></p><p><span data-id="+res.data.list[i].id+" data-picUrl="+res.data.list[i].picUrl+" data-name="+res.data.list[i].name+" data-needScore="+res.data.list[i].needScore+" data-price="+res.data.list[i].price+" data-needScoreName="+currency[res.data.list[i].needScoreId]+" class='_collectNone'>收藏</span><span class='__exchangeNone' data-id="+res.data.list[i].id+" data-picUrl="+res.data.list[i].picUrl+" data-name="+res.data.list[i].name+" data-needScore="+res.data.list[i].needScore+" data-price="+res.data.list[i].price+" data-needScoreName="+currency[res.data.list[i].needScoreId]+" data-type="+res.data.list[i].type+" data-needScoreId="+res.data.list[i].needScoreId+">兑换</span></p></dd></dl></li>"
+	                    	if($(".car-list").eq(0).find("li").length<4){
+	                    		$(".car-list").eq(0).append(li)
+	                    	}
+
+	                    }
+	      //               else if(res.goods[i].needScoreId==3){
+							// var li="<li><dl><dt><img src="+res.goods[i].picUrl+"></dt><dd><p>"+res.goods[i].name+"</p><p><span>"+res.goods[i].needScore+currency[res.goods[i].needScoreId]+"</span><span><b>市场价:"+res.goods[i].price+"元</b></span></p><p><span data-id="+res.goods[i].id+" data-picUrl="+res.goods[i].picUrl+" data-name="+res.goods[i].name+" data-needScore="+res.goods[i].needScore+" data-price="+res.goods[i].price+" data-needScoreName="+currency[res.goods[i].needScoreId]+" class='_collectNone'>收藏</span><span class='__exchangeNone' data-id="+res.goods[i].id+" data-picUrl="+res.goods[i].picUrl+" data-name="+res.goods[i].name+" data-needScore="+res.goods[i].needScore+" data-price="+res.goods[i].price+" data-needScoreName="+currency[res.goods[i].needScoreId]+" data-type="+res.goods[i].type+" data-needScoreId="+res.goods[i].needScoreId+">兑换</span></p></dd></dl></li>"
+	      //               	if($(".car-list").eq(1).find("li").length<4){
+	      //               		$(".car-list").eq(1).append(li)
+	      //               	}
+	      //               }
+	              }else{
+	                    if (res.data.list[i].needScoreId==2){
+							var li="<li><dl><dt><img src="+res.data.list[i].picUrl+"></dt><dd><p>"+res.data.list[i].name+"</p><p><span>"+res.data.list[i].needScore+currency[res.data.list[i].needScoreId]+"</span><span><b>市场价:"+res.data.list[i].price+"元</b></span></p><p><span data-id="+res.data.list[i].id+" data-picUrl="+res.data.list[i].picUrl+" data-name="+res.data.list[i].name+" data-needScore="+res.data.list[i].needScore+" data-price="+res.data.list[i].price+" data-needScoreName="+currency[res.data.list[i].needScoreId]+" class='_collectNone'>收藏</span><span class='__exchangeNone' data-id="+res.data.list[i].id+" data-picUrl="+res.data.list[i].picUrl+" data-name="+res.data.list[i].name+" data-needScore="+res.data.list[i].needScore+" data-price="+res.data.list[i].price+" data-needScoreName="+currency[res.data.list[i].needScoreId]+" data-type="+res.data.list[i].type+" data-needScoreId="+res.data.list[i].needScoreId+">兑换</span></p></dd></dl></li>"
+	                    	if($(".car-list").eq(1).find("li").length<4){
+	                    		$(".car-list").eq(1).append(li)
+	                    	}
+	                    }
+	      //               else if(res.goods[i].needScoreId==3){
+							// var li="<li><dl><dt><img src="+res.goods[i].picUrl+"></dt><dd><p>"+res.goods[i].name+"</p><p><span>"+res.goods[i].needScore+currency[res.goods[i].needScoreId]+"</span><span><b>市场价:"+res.goods[i].price+"元</b></span></p><p><span data-id="+res.goods[i].id+" data-picUrl="+res.goods[i].picUrl+" data-name="+res.goods[i].name+" data-needScore="+res.goods[i].needScore+" data-price="+res.goods[i].price+" data-needScoreName="+currency[res.goods[i].needScoreId]+" class='_collectNone'>收藏</span><span class='__exchangeNone' data-id="+res.goods[i].id+" data-picUrl="+res.goods[i].picUrl+" data-name="+res.goods[i].name+" data-needScore="+res.goods[i].needScore+" data-price="+res.goods[i].price+" data-needScoreName="+currency[res.goods[i].needScoreId]+" data-type="+res.goods[i].type+" data-needScoreId="+res.goods[i].needScoreId+">兑换</span></p></dd></dl></li>"
+	      //               	if($(".car-list").eq(0).find("li").length<4){
+	      //               		$(".car-list").eq(0).append(li)
+	      //               	}
+	      //               }
+	              }
+	          }
+				// setTimeout(function(){
+				// 	mySwiper2 = new Swiper('.swiper-container2', {
+		  //             onSlideChangeStart: function(swiper){
+		  //             	$(".car-top>div").eq(swiper.activeIndex).addClass("active").siblings().removeClass("active");
+		  //             }
+		  //          })
+				// })
+			},
+			error:function(){
+
+			}
+		});
+
+		var collectId="";
+		$(".car-list").on("click","._collectNone",function(){
+			$(".collectEvoke").show()
+			collectId=$(this).attr("data-id")
+			$(".collectionOfShade").show()
+			$(".collectEvoke-name").html($(this).attr("data-name"));
+			$(".collectEvoke-need").find("span").eq(0).html($(this).attr("data-needscore")+$(this).attr("data-needscorename"))
+			$(".collectEvoke-need").find("span").eq(1).find("span").html("市场价"+$(this).attr("data-price"))
+			$(".collectEvoke-content-icon").find("img").attr("src",$(this).attr("data-picurl"))
+		})
+		$(".collectEvoke-buttom").on("click",function(){
+			$.ajax({
+				type:"get",
+				url:"/api/pointShopGoods/addStoreGoods",
+				async:true,
+				data:{
+					country:0,
+					goodsId:collectId
+				},
+				success:function(res){
+					if (res.result==0) {
+						$(".collectEvoke").hide()
+						$(".collectionOfShade").hide()
+						$(".carAlert").show();
+						$(".carAlert").html("收藏成功")
+						setTimeout(function(){
+							$(".carAlert").hide();
+							$(".collectEvoke").hide()
+						},2500)
+					}else{
+						$(".collectEvoke").hide()
+						$(".collectionOfShade").hide()
+						$(".carAlert").show();
+						$(".carAlert").html("该货物已收藏")
+						setTimeout(function(){
+							$(".carAlert").hide();
+							$(".collectEvoke").hide()
+						},2500)
+					}
+				},
+				error:function(){
+
+				}
+			});
+		})
+		var num=1;
+		var needScoreId="";
+		var needScore="";
+		var type="";
+		var goodsId="";
+		var goodsName=""
+		$(".car-list").on("click",".__exchangeNone",function(){
+      sessionStorage.setItem("num",1)
+			$(".exchange").show();
+			$(".exchange-num").find("span").eq(1).html(num)
+			$(".collectionOfShade").show()
+			$(".exchange-icon").find("img").attr("src",$(this).attr("data-picurl"))
+			$(".exchange-name").html($(this).attr("data-name"))
+			goodsName=$(this).attr("data-name");
+			needScoreId=$(this).attr("data-needscoreid");
+			needScore=$(this).attr("data-needscore");
+			type=$(this).attr("data-type");
+			goodsId=$(this).attr("data-id")
+			$(".exchange-need").find("span").eq(0).html($(this).attr("data-needscore")+$(this).attr("data-needscorename"))
+			$(".exchange-need").find("span").eq(1).find("span").html("市场价"+$(this).attr("data-price"))
+		})
+		$(".reduce").on("click",function(){
+			if ($(this).next().html()>1) {
+				$(this).next().html(Number($(this).next().html())-1)
+				sessionStorage.setItem("num",Number($(this).next().html()))
+			}
+		})
+		$(".add").on("click",function(){
+			$(this).parent().find("span").eq(1).html(Number($(this).parent().find("span").eq(1).html())+1)
+			sessionStorage.setItem("num",Number($(this).parent().find("span").eq(1).html()))
+		})
+		$(".exchange-buttom").on("click",function(){
+			if(!login){
+				window.location.href="http://m.game.13322.com/login"
+			}else{
+				$(".exchange").hide();
+				if(needScoreId==2){
+				    if(sessionStorage.getItem("num")){
+              if(Number(quan)<Number(needScore*Number(sessionStorage.getItem("num")))){
+                $(".exchangeFail").show()
+                $(".faile-name").html("乐盈券不足")
+                return false;
+              }
+            }else{
+              if(Number(quan)<Number(needScore)){
+                $(".exchangeFail").show()
+                $(".faile-name").html("乐盈券不足")
+                return false;
+              }
+            }
+
+				}else if(needScoreId==3){
+					if(Number(jf)<Number(needScore)){
+						$(".exchangeFail").show()
+						$(".faile-name").html("积分不足")
+						return false;
+					}
+				}
+				if(type==2){
+          $(".collectionOfShade").hide()
+          $(".exchange").hide();
+          $(".collectEvoke").hide()
+					window.location.href="affirm.html?userId="+userId+"&goodsId="+goodsId;
+					sessionStorage.setItem("car","car.html")
+
+				}else if(type==1){
+					sessionStorage.setItem("car","car.html")
+          $(".collectionOfShade").hide()
+          $(".exchange").hide();
+          $(".collectEvoke").hide()
+					window.location.href="profile2.html?userId="+userId+"&goodsId="+goodsId;
+				}else{
+					$.ajax({
+						type:"get",
+						url:"/api/pointShopGoods/exchangeGoods",
+						async:true,
+						data:{
+							country:0,
+							goodsId:goodsId,
+							userId:userId,
+							count:num
+						},
+						success:function(res){
+							if (res.result==0) {
+								$(".exchangeSuccess").show()
+								$(".success-name").html(goodsName)
+							}else{
+								$(".exchangeFail").show();
+								$(".faile-name").show(res.msg)
+							}
+						},
+						error:function(){
+
+						}
+					});
+				}
+			}
+		})
+		$(".success-buttom").on("click",function(){
+			$(".exchangeSuccess").hide()
+			$(".collectionOfShade").hide()
+		})
+		$(".faile-buttom").on("click",function(){
+			 $(".exchangeFail").hide()
+      sessionStorage.setItem("dJ",window.location.href)
+			window.location.href = 'http://m.game.13322.com/exchange';
+		})
+		$(".fail-close").on("click",function(){
+			 $(".exchangeFail").hide()
+			 $(".collectionOfShade").hide()
+		})
+    $(".exchangeFail").on("click",function(){
+      $(".exchangeFail").hide()
+      $(".collectionOfShade").hide()
+    })
+		$(".collectionOfShade").on("click",function(){
+			$(".collectionOfShade").hide()
+			$(".exchange").hide();
+			$(".collectEvoke").hide()
+		})
+		// $(".car-top>div").on("click",function(){
+		// 	$(this).siblings().removeClass("active");
+		// 	$(this).addClass("active")
+		// 	mySwiper2.slideTo($(this).index(), 200, false);
+		// })
+		function carmore(value){
+			window.location.href="carmore.html?type="+value
+		}
+		 $(".back").on("click",function(){
+    		window.location.href=sessionStorage.getItem("url");
+    	})
+      $(".linkLeying").on("click",function () {
+        sessionStorage.setItem("dJ",window.location.href)
+        window.location.href="http://m.game.13322.com/exchange"
+      })
+	</script>
+</html>

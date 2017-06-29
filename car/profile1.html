@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>profile1</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maxinum-scale=1.0,mininum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="./reset.css">
+    <style type="text/css">
+    #profile1 {
+    	width: 100%;
+    	overflow: hidden;
+    	font-family: helvetica;
+    }
+    #profile1 .title {
+        position: relative;
+        height: 0.45rem;
+        line-height: 0.45rem;
+        width: 100%;
+        text-align: center;
+        background: #e7384a;
+        font-size: 0.25rem;
+        color: #fff;
+    }
+    #profile1 .iconBack {
+        position: absolute;
+        top: 0;
+        left: 0.05rem;
+        width: 0.25rem;
+        height: 100%;
+        background: url("../images/exchange/return.png") no-repeat center left;
+    }
+    #profile1 .dataList {
+		width: 100%;
+    }
+    #profile1 .dataList li {
+    	margin:0.1rem;
+    	height: auto;
+    	background: #f5f5f5;
+    	font-size: 0.18rem;
+    	padding: 0.05rem;
+    }
+    #profile1 .name-tel {
+    	display: flex;
+    }
+    #profile1 .name-tel>span {
+		flex: 1;
+		/*line-height: 0.2rem;*/
+    }
+    #profile1 .name-tel>span:nth-child(1){
+    	float:left;
+    }
+    #profile1 .name-tel>span:nth-child(2){
+    	text-align: right;
+    }
+    #profile1 .exhibition {
+    	line-height: 0.3rem;
+		word-break: break-all;
+    }
+    #profile1 .top {
+    	border-bottom: 1px dashed #d1d3d6;
+    	padding: .02rem;
+    }
+    #profile1 .check {
+    	display: inline-block;
+    	height: 0.2rem;
+    	width: 0.2rem;
+    	margin-top: 0.1rem;
+    	background: url(../images/my/my11.png) no-repeat center  center/ 100% 100%;
+    }
+    #profile1 .check.sele {
+    	display: inline-block;
+    	height: 0.2rem;
+    	width: 0.2rem;
+    	margin-top: 0.1rem;
+    	background: url(../images/gouxuan.png) no-repeat center  center/ 100% 100%;
+    }
+    #profile1 .bottom {
+    	height: 0.4rem;
+    	line-height: 0.4rem;
+    }
+    #profile1 .bottom div {
+    	display: inline-block;
+    	width: 50%;
+    }
+	#profile1 .operate {
+		display: inline-block;
+		float: right;
+		margin-top: 0.03rem;
+	}
+	#profile1 .operate .edit {
+		border: 1px solid #d1d3d6;
+		padding:0.06rem 0.12rem;
+		font-size: 0.16rem;
+		margin-left: 0.15rem;
+	}
+	#profile1 .operate .delete {
+		border: 1px solid #d1d3d6;
+		padding:0.06rem 0.12rem;
+		font-size: 0.16rem;
+		margin:0 0.1rem;
+	}
+	#profile1 .addAddr {
+		width: 100%;
+	    height: .5rem;
+	    line-height: .5rem;
+	    text-align: center;
+	    background: #e7374b;
+	    color: #fff;
+	    font-size: .18rem;
+	    position: fixed;
+	    bottom: 0;
+	}
+    </style>
+    <script type="text/javascript" src="reset.js"></script>
+    <script type="text/javascript" src="template-web.js"></script>
+    <script type="text/javascript" src="zepto.min.js"></script>
+</head>
+
+<body>
+    <div id="profile1">
+        <div class="title">
+            <i class="iconBack"></i>
+            <h3>收获地址管理</h3>
+        </div>
+        <div class="profile1-content">
+        	<ul class="dataList">
+        	</ul>
+        </div>
+        <div class="addAddr">新增收货地址</div>
+    </div>
+
+
+    <script type="text/html" id="temp">
+    	<% for(var i=0;i<data.data.length;i++) { %>
+			    <li class="content-list">
+			        <div class="top" data-id="<%= data.data[i].id %>">
+			          <div class="name-tel">
+			            <span class="name"><%=data.data[i].name%></span>
+			            <span class="tel"><%=data.data[i].tel%></span>
+			          </div>
+			          <div class="exhibition">
+			            <%=data.data[i].detail%>
+			          </div>
+			        </div>
+			        <div class="bottom" data-id="<%= data.data[i].id %>">
+			          <div class="defaultSel">
+			          	<%if(data.data[i].last==0){%>
+			          	<span class="check sele"></span>
+			          	<%}else{%>
+						<span class="check"></span>
+			          	<%}%>
+			          	<span class="word">设为默认地址</span>
+			          </div>
+			          <div class="operate">
+			          	<span class="edit" data-id="<%= data.data[i].id %>">编辑</span>
+			          	<span class="delete">删除</span>
+			          </div>
+			        </div>
+			    </li>
+		<%	}	%>
+    </script>
+    <script type="text/javascript">
+    				var Requres = new UrlSearch();
+					var userId =Requres.userId;
+					$.ajax({
+						type : 'GET',
+						url : '/api/pointShopUser/queryAddress',
+						data:{
+							country:0,
+							userId:userId
+						},
+						success : function(data) {
+							var html = template('temp',{data});
+							$('.dataList').append(html);
+							$('.defaultSel').click(function(){
+								var id = $(this).parent().attr('data-id');
+								var _this = this;
+								if($(this).find('.check').hasClass('sele')){
+									$.ajax({
+										type : 'GET',
+										url : '/api/pointShopUser/addAddress',
+										data:{
+											addressId:id,
+											country:0,
+											useDefault:1,
+											userId:userId
+										},
+										success:function(data){
+											if(data.result==0){
+												$(_this).find('.check').removeClass('sele');
+											}
+										}
+									});
+								}else {
+									$.ajax({
+										type : 'GET',
+										url : '/api/pointShopUser/addAddress',
+										data:{
+											addressId:id,
+											country:0,
+                      last:0,
+											userId:userId
+										},
+										success:function(data){
+											if(data.result==0){
+												$(".dataList").find('.check').removeClass('sele');
+												$(_this).find('.check').addClass('sele');
+											}
+										}
+									});
+								}
+							});
+							$('.delete').click(function(){
+								var id = $(this).parent().parent().attr('data-id');
+								console.log(id);
+								var _this = this;
+								$.ajax({
+										type : 'GET',
+										url : '/api/pointShopUser/delAddress',
+										data:{
+											addressId:id,
+											country:0
+										},
+										success:function(data){
+											console.log(data);
+											if(data.result==0){
+												$(_this).parent().parent().parent().remove();
+											}
+										}
+									});
+							})
+						},
+						error : function(xhr, type) {
+							return "error";
+						}
+					});
+
+			$(".iconBack").on("click",function(){
+				window.location.href="profile2.html?goodsId="+Requres.goodsId+"&userId="+Requres.userId;
+			})
+    		$(".dataList").on("click",".edit",function(){
+    			window.location.href="profile.html?goodsId="+Requres.goodsId+"&userId="+Requres.userId+"&addressId="+$(this).attr("data-id");
+    		})
+    		$(".dataList").on("click",".top",function(){
+    			window.location.href="profile2.html?goodsId="+Requres.goodsId+"&userId="+Requres.userId+"&addressId="+$(this).attr("data-id");
+    		})
+			$(".addAddr").on('click', function () {
+				window.location.href = 'profile.html?goodsId='+Requres.goodsId+"&userId="+Requres.userId;
+			})
+    </script>
+</body>
+
+</html>

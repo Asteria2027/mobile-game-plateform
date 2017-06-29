@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="玩一下是专业网页游戏联运平台，主要提供精品网页游戏的运营和推广，玩一下立足玩家需求，为中国游戏玩家提供最全、最酷、最热门的精品游戏，致力于做玩家最爱、最信任的游戏平台，玩家可赚取积分换礼品，注册成为新用户更有丰富豪礼相送!"/>
+		<meta name="keywords" content="玩一下,热门游戏,网页游戏大全"/>
+		<title>新增收获地址</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maxinum-scale=1.0,mininum-scale=1.0,user-scalable=no">
+		<script src="../lib/jquery/zepto.min.js"></script>
+		<script src="reset.js" type="text/javascript" charset="utf-8"></script>
+		<script src="profile.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="reset.css"/>
+		<link rel="stylesheet" type="text/css" href="profile.css"/>
+	</head>
+	<body>
+		<div class="profile">
+			<div class="title">
+				<span class="back"></span>
+			    <span class="name">新增收获地址</span>
+			    <span class="zw"></span>
+			</div>
+			<div class="content">
+		    <ul>
+		      <li class="name ">
+		        <input placeholder="收货人姓名" maxlength="5" id="name">
+		        <span class="icon" onclick="icon('name')"></span>
+		      </li>
+		      <li class="phone ">
+		        <input type="number" placeholder="手机号码"  maxlength="11" id="phone">
+		        <span class="icon" onclick="icon('phone')"></span>
+		      </li>
+		      <li class="area" id="demo1">
+		        <input id="value1" class="region" readonly="readonly"  type="text" value="省、市、县">
+		        <span class="iconleft"></span>
+		      </li>
+		      <li class="address">
+		        <textarea placeholder="详细地址" maxlength="80"  id="address"></textarea>
+		        <span class="icon"  onclick="icon('address')"></span>
+		      </li>
+		      <li class="default">
+		        <span class="default-icon" ></span>
+		        <span>保存默认地址</span>
+		      </li>
+		      <li class="">
+		        <div class="buttom">保存</div>
+		      </li>
+		      <li class="Prompt">
+		      		  请输入正确的收货人信息
+		      </li>
+		    </ul>
+		  </div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var Requres = new UrlSearch();
+		if (Requres.addressId) {
+			// debugger
+			$.ajax({
+				type:"get",
+				url:"/api/pointShopUser/queryAddress",
+				async:true,
+				data:{
+					country:0,
+					userId:Requres.userId
+				},
+				success:function(res){
+					for(var i=0;i<res.list.length;i++){
+						if(res.list[i].id==Requres.addressId){
+							document.getElementById("value1").value=res.list[i].province+","+res.list[i].city+","+res.list[i].street;
+				          	document.getElementById("name").value=res.list[i].name;
+				          	document.getElementById("phone").value=res.list[i].tel;
+				          	document.getElementById("address").value=res.list[i].detail;
+				          	if(res.list[i].last==0){
+				          		$(".default-icon").addClass("checkout")
+				          	}
+						}
+
+					}
+				},
+				error:function(){
+
+				}
+			});
+		}
+		$(".default-icon").on("click",function(){
+			if ($(this).hasClass("checkout")) {
+				$(this).removeClass("checkout")
+			}else{
+				$(this).addClass("checkout")
+			}
+		})
+		var text=document.getElementById("address");
+		autoTextarea(text)
+		function autoTextarea(elem, extra, maxHeight) {
+			extra = extra || 0;
+	        var isFirefox = !!document.getBoxObjectFor || 'mozInnerScreenX' in window,
+	          isOpera = !!window.opera && !!window.opera.toString().indexOf('Opera'),
+	          addEvent = function (type, callback) {
+	            elem.addEventListener ?
+	              elem.addEventListener(type, callback, false) :
+	              elem.attachEvent('on' + type, callback);
+	          },
+	          getStyle = elem.currentStyle ? function (name) {
+	              var val = elem.currentStyle[name];
+
+	              if (name === 'height' && val.search(/px/i) !== 1) {
+	                var rect = elem.getBoundingClientRect();
+	                return rect.bottom - rect.top -
+	                  parseFloat(getStyle('paddingTop')) -
+	                  parseFloat(getStyle('paddingBottom')) + 'px';
+	              };
+
+	              return val;
+	            } : function (name) {
+	              return getComputedStyle(elem, null)[name];
+	            },
+	          minHeight = parseFloat(getStyle('height'));
+
+	        elem.style.resize = 'none';
+
+	        var change = function () {
+	          var scrollTop, height,
+	            padding = 0,
+	            style = elem.style;
+
+	          if (elem._length === elem.value.length) return;
+	          elem._length = elem.value.length;
+
+	          if (!isFirefox && !isOpera) {
+	            padding = parseInt(getStyle('paddingTop')) + parseInt(getStyle('paddingBottom'));
+	          };
+	          scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+
+	          elem.style.height = minHeight + 'px';
+	          if (elem.scrollHeight > minHeight) {
+	            if (maxHeight && elem.scrollHeight > maxHeight) {
+	              height = maxHeight - padding;
+	              style.overflowY = 'auto';
+	            } else {
+	              height = elem.scrollHeight - padding;
+	              style.overflowY = 'hidden';
+	            };
+	            style.height = height + extra + 'px';
+	            scrollTop += parseInt(style.height) - elem.currHeight;
+	            document.body.scrollTop = scrollTop;
+	            document.documentElement.scrollTop = scrollTop;
+	            elem.currHeight = parseInt(style.height);
+	          };
+	        };
+	        addEvent('propertychange', change);
+	        addEvent('input', change);
+	        addEvent('focus', change);
+	        change();
+		}
+		function icon(id){
+			$("#"+id).val("")
+		}
+		var area1 = new LArea();
+	    area1.init({
+	        'trigger': '#demo1', //触发选择控件的文本框，同时选择完毕后name属性输出到该位置
+	        'valueTo': '#value1', //选择完毕后id属性输出到该位置
+	        'keys': {
+	            id: 'name',
+	            name: 'name'
+	        }, //绑定数据源相关字段 id对应valueTo的value属性输出 name对应trigger的value属性输出
+	        'type': 1, //数据源类型
+	        'data': LAreaData //数据源
+	    });
+	    area1.value=[1,13,3];//控制初始位置，注意：该方法并不会影响到input的value
+	    $(".buttom").on("click",function(){
+	    	 	var 	_region=document.getElementById("value1").value;
+	          	var 	_name=document.getElementById("name").value;
+	          	var 	_tel=document.getElementById("phone").value;
+	          	var 	_address=document.getElementById("address").value;
+	           if(!_name||!_tel||_region=="省、市、县"||!_address){
+	           	$(".Prompt").show();
+	            return false
+	          }
+	           var region=_region.split(",");
+	           var Default=""
+	           if ($(".default-icon").hasClass("checkout")) {
+	           		Default=0
+	           }else{
+	           		Default=1
+	           }
+	           if (Requres.addressId) {
+	           	$.ajax({
+					type:"get",
+					url:"/api/pointShopUser/addAddress",
+					async:true,
+					data:{
+						country:0,
+						userId:Requres.userId,
+						province:region[0],
+						city:region[1],
+						street:region[2],
+						detail:_address,
+            last:Default,
+						addressId:Requres.addressId,
+						name:_name,
+						tel:_tel
+					},
+					success:function(res){
+
+						if(res.result==0){
+							window.location.href="profile1.html?goodsId="+Requres.goodsId+"&userId="+Requres.userId
+						}
+					},
+					error:function(){
+
+					}
+				});
+	           }else{
+	           	$.ajax({
+					type:"get",
+					url:"/api/pointShopUser/addAddress",
+					async:true,
+					data:{
+						country:0,
+						userId:Requres.userId,
+						province:region[0],
+						city:region[1],
+						street:region[2],
+						detail:_address,
+            last:Default,
+						name:_name,
+						tel:_tel
+					},
+					success:function(res){
+						if(res.result==0){
+							window.location.href="profile1.html?goodsId="+Requres.goodsId+"&userId="+Requres.userId
+						}
+					},
+					error:function(){
+
+					}
+				});
+	           }
+
+	    })
+		$('.back').on('click', function () {
+			window.location.href="profile1.html?goodsId="+Requres.goodsId+"&userId="+Requres.userId;
+		})
+	</script>
+</html>

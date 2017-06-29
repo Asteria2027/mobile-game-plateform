@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="玩一下是专业网页游戏联运平台，主要提供精品网页游戏的运营和推广，玩一下立足玩家需求，为中国游戏玩家提供最全、最酷、最热门的精品游戏，致力于做玩家最爱、最信任的游戏平台，玩家可赚取积分换礼品，注册成为新用户更有丰富豪礼相送!"/>
+		<meta name="keywords" content="玩一下,热门游戏,网页游戏大全"/>
+		<title>确认订单</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maxinum-scale=1.0,mininum-scale=1.0,user-scalable=no">
+		<script src="../lib/jquery/zepto.min.js"></script>
+		<script src="reset.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="reset.css"/>
+		<link rel="stylesheet" type="text/css" href="profile2.css"/>
+	</head>
+	<body>
+		<div class="profile2">
+			<div class="title">
+		      <span class="back"></span>
+		      <span class="name">确认订单</span>
+		      <span class="zw"></span>
+		    </div>
+		    <div class="content">
+		    	<div class="address">
+			        <div class="address-Bg">
+			          <div class="have" onclick="goAddress()">
+			            <div class="have-content">
+			              <div class="top">
+			                <span class="name"></span>
+			                <span class="phone"></span>
+			              </div>
+			              <div class="address-bottom">
+
+			              </div>
+			            </div>
+			            <div class="address-icon"></div>
+			          </div>
+			          <div class="nothing" onclick="goAddress()">
+			            <div>客官，请先添加您的收货地址哦</div>
+			            <div class="address-icon"></div>
+			          </div>
+			        </div>
+	     		 </div>
+	     		 <div class="goods">
+			         <div class="goods-list">
+			           <div class="goods-icon"><img></div>
+			           <div class="goods-notic">
+			             <div class="name"></div>
+			             <div class="price"></div>
+			             <div class="goods-num">
+			               <span class="reduce">-</span>
+			               <span></span>
+			               <span class="add">+</span>
+			             </div>
+			           </div>
+			         </div>
+			     </div>
+			     <div class="notic">
+			        <ul>
+			          <li class="notic-list" style="border-bottom: 1px solid #F5F5F5;">
+			            <span>配送方式:</span>
+			            <span>快递</span>
+			          </li>
+			          <li class="notic-list" style="border-bottom: 1px solid #F5F5F5;">
+			            <span>共1件商品</span>
+			            <span>小计:<span class="zhi"></span></span>
+			          </li>
+			          <li class="notic-list">
+			            <span class="check" :class="{checkout:checkout}" @click="checkout=!checkout"></span>
+			            <span>同意</span>
+			            <span>《玩一下兑换协议》</span>
+			          </li>
+			        </ul>
+			      </div>
+		    </div>
+		     <div class="bottom">
+		      <span>共1件</span>
+		      <span>合计:</span>
+		      <span class="zhi"></span>
+		      <span></span>
+		      <span class="_purchase">确认</span>
+		    </div>
+		    <div class="prompt"></div>
+      <div class="exchangeFail" >
+        <div class="fail-content">
+          <div class="fail-title">
+            <span class="fail-icon"></span>
+            <span class="fail-sorry">对不起</span>
+            <span class="fail-close"></span>
+          </div>
+          <div class="fail-notic">
+            <div class="faile-name">乐盈券不足</div>
+            <div class="faile-buttom">去赚乐盈券</div>
+          </div>
+        </div>
+      </div>
+      <div class="exchangeSuccess">
+        <div class="success-content">
+          <div class="success-title">
+            <span class="success-icon"></span>
+            <span class="success-sorry">恭喜您</span>
+          </div>
+          <div class="success-notic">
+            <div class="success">兑换成功</div>
+            <div class="success-name"></div>
+            <div class="success-buttom" >确定</div>
+          </div>
+        </div>
+      </div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var currency=[' ',' ','乐盈券','积分'];
+		var Requres = new UrlSearch();
+		var needs="";
+		var addressId=""
+		var phone=""
+    $(".faile-buttom").on("click",function(){
+      $(".exchangeFail").hide()
+      sessionStorage.setItem("dJ",window.location.href)
+      window.location.href = 'http://m.game.13322.com/exchange';
+    })
+    $(".success-buttom").on("click",function(){
+      $(".exchangeSuccess").hide();
+      $(".collectionOfShade").hide();
+      window.location.href="car.html";
+    })
+    $(".fail-close").on("click",function(){
+      $(".exchangeFail").hide()
+      $(".collectionOfShade").hide()
+    })
+    $(".exchangeFail").on("click",function(){
+      $(".exchangeFail").hide()
+      $(".collectionOfShade").hide()
+    })
+		$.ajax({
+			type:"get",
+			url:"/api/pointShopUser/queryAddress",
+			async:true,
+			data:{
+				country:0,
+				userId:Requres.userId
+			},
+			success:function(res){
+				if(res.result==0){
+					if(Requres.addressId){
+						if (res.data[0]!=null) {
+							for(var i=0;i<res.data.length;i++){
+			                    if(Requres.addressId==res.data[i].id){
+			                       $(".have").css("display","flex")
+			                       $(".have .name").html(res.data[i].name)
+			                       $(".have .phone").html(res.data[i].tel)
+			                       $(".have .address-bottom").html("收获地址:"+res.data[i].province+res.data[i].street+res.data[i].detail)
+			                       addressId=Requres.addressId
+			                       phone=res.data[i].tel
+
+			                    }
+		                	}
+						}else{
+							$(".nothing").css("display","flex")
+						}
+
+					}else{
+						if (res.data[0]) {
+							 $(".have").css("display","flex")
+	                       $(".have .name").html(res.data[0].name)
+	                       $(" .have .phone").html(res.data[0].tel)
+	                       $(".have .address-bottom").html("收获地址:"+res.data[0].province+res.data[0].street+res.data[0].detail)
+	                       addressId=res.data[0].id
+	                       phone=res.data[0].tel
+						}else{
+							$(".nothing").css("display","flex")
+						}
+					}
+				}
+			},
+			error:function(){
+
+			}
+		});
+		$.ajax({
+			type:"get",
+			url:"/api/pointShopGoods/getGoodsInfo",
+			async:true,
+			data:{
+				country:0,
+        id:Requres.goodsId
+			},
+			success:function(res){
+				if (res.result==0) {
+					$(".goods-icon").find("img").attr("src",res.data.picUrl)
+					$(".goods-notic .name").html(res.data.name)
+					$(".goods-notic .price").html(res.data.needScore+currency[res.data.needScoreId])
+					if (sessionStorage.getItem("num")) {
+						$(".goods-num").find("span").eq(1).html(sessionStorage.getItem("num"))
+						$(".notic .zhi").html(Number(res.data.needScore)*Number(sessionStorage.getItem("num")))
+						$(".bottom .zhi").html(Number(res.data.needScore)*Number(sessionStorage.getItem("num")))
+						needs=res.data.needScore
+					}else{
+						$(".goods-num").find("span").eq(1).html(1)
+						$(".notic .zhi").html(res.data.needScore)
+						$(".bottom .zhi").html(res.data.needScore)
+						needs=res.data.needScore
+					}
+				}
+			},
+			error:function(){
+
+			}
+		});
+		$(".goods-num").on("click",".reduce",function(){
+			if ($(".goods-num").find("span").eq(1).html()>1) {
+				$(".goods-num").find("span").eq(1).html(Number($(".goods-num").find("span").eq(1).html())-1)
+				$(".notic .zhi").html(Number(needs)*Number($(".goods-num").find("span").eq(1).html()))
+				$(".bottom .zhi").html(Number(needs)*Number($(".goods-num").find("span").eq(1).html()))
+			}
+		})
+		$(".goods-num").on("click",".add",function(){
+			$(".goods-num").find("span").eq(1).html(Number($(".goods-num").find("span").eq(1).html())+1)
+			$(".notic .zhi").html(Number(needs)*Number($(".goods-num").find("span").eq(1).html()))
+			$(".bottom .zhi").html(Number(needs)*Number($(".goods-num").find("span").eq(1).html()))
+		})
+		$(".check").on("click",function(){
+			if ($(this).hasClass("checkout")) {
+				$(this).removeClass("checkout")
+			}else{
+				$(this).addClass("checkout")
+			}
+		})
+		$("._purchase").on("click",function(){
+			if ($(".nothing").css("display")=="flex") {
+				$(".prompt").show()
+				$(".prompt").html("请选择收获地址")
+				setTimeout(function(){
+					$(".prompt").hide()
+				},2500)
+			}else if(!$(".check").hasClass("checkout")){
+				$(".prompt").show()
+				$(".prompt").html("请勾选《玩一下兑换协议》")
+				setTimeout(function(){
+					$(".prompt").hide()
+				},2500)
+			}else{
+				$.ajax({
+					type:"get",
+					url:"/api/pointShopGoods/exchangeGoods",
+					async:true,
+					data:{
+						country:0,
+						goodsId:Requres.goodsId,
+						addressId:addressId,
+						phone:phone,
+						count:$(".goods-num").find("span").eq(1).html(),
+						userId:Requres.userId
+					},
+					success:function(res){
+            if(res.result==0){
+              $(".exchangeSuccess").show()
+            }else if(res.result==76){
+              $(".exchangeFail").show();
+              $(".faile-name").html("库存不足")
+            }else{
+              $(".exchangeFail").show();
+              $(".faile-name").html(res.msg)
+            }
+					},
+					error:function(){
+
+					}
+				});
+			}
+		})
+		$(".back").on("click",function(){
+			window.location.href=sessionStorage.getItem("car")
+		})
+		function goAddress(){
+			window.location.href="profile1.html?goodsId="+Requres.goodsId+"&userId="+Requres.userId;
+		}
+	</script>
+</html>

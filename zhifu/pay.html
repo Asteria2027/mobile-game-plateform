@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="玩一下是专业网页游戏联运平台，主要提供精品网页游戏的运营和推广，玩一下立足玩家需求，为中国游戏玩家提供最全、最酷、最热门的精品游戏，致力于做玩家最爱、最信任的游戏平台，玩家可赚取积分换礼品，注册成为新用户更有丰富豪礼相送!" />
+    <meta name="keywords" content="玩一下,热门游戏,网页游戏大全" />
+    <title>玩一下-最热门网页游戏集合-网页游戏大全</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maxinum-scale=1.0,mininum-scale=1.0,user-scalable=no">
+    <script src="reset.js" type="text/javascript" charset="utf-8"></script>
+    <script src="zepto.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="reset.css" />
+    <style type="text/css">
+    html,
+    body {
+        height: 100%;
+    }
+    
+    .pay {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .pay-title {
+        position: relative;
+        top: 0;
+        left: 0;
+        z-index: 11;
+        height: .45rem;
+        line-height: .45rem;
+        text-align: center;
+        color: #fff;
+        background-color: #e7374b;
+        display: block;
+        display: flex;
+    }
+    
+    .pay-title .back {
+        display: block;
+        height: .45rem;
+        width: .45rem;
+        line-height: .45rem;
+        background: url(./back.png) no-repeat center;
+        background-size: 60% 60%;
+    }
+    
+    .pay-title .name {
+        display: block;
+        float: left;
+        height: .45rem;
+        line-height: .45rem;
+        text-align: center;
+        color: #fff;
+        font-size: .2rem;
+        flex: 1;
+    }
+    
+    .pay-title .zw {
+        display: inline-block;
+        height: .45rem;
+        width: .45rem;
+    }
+    
+    .pay-content {
+        display: block;
+        flex: 1;
+        width: 100%;
+        position: relative;
+        left: 0;
+        background: #f5f5f5;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    
+    .pay .user {
+        background: #fff;
+        font-size: 0.18rem;
+    }
+    
+    .pay .user > div {
+        padding: 0 0.15rem;
+        height: 0.52rem;
+        line-height: 0.52rem;
+        border-bottom: 1px solid #f5f5f5;
+    }
+    
+    .pay .user > div span {
+        padding-right: 0.35rem;
+    }
+    
+    .pay .account-name {
+        color: #b4b4b4;
+    }
+    
+    .pay .balance-money {
+        display: block;
+        display: inline-block;
+        color: #fc9f00;
+    }
+    
+    .pay .balance-money i {
+        float: left;
+        display: block;
+        height: .52rem;
+        width: .42rem;
+        background: url('./czlyb.png') no-repeat left center;
+        background-size: 65% 50%;
+    }
+    
+    .pay .buttom {
+        position: relative;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: .45rem;
+        line-height: .45rem;
+        text-align: center;
+        font-size: .2rem;
+        color: #fff;
+        background-color: #e7384a;
+    }
+    
+    .pay-amount {
+        font-size: .18rem;
+        padding-left: .13rem;
+        height: .4rem;
+        line-height: .4rem;
+        color: #b4b4b4;
+    }
+    
+    .pay .type ul {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        background-color: #fff;
+        display: block;
+        padding: .2rem 0;
+    }
+    
+    .pay .type ul li {
+        width: 30%;
+        background-color: #fff;
+        height: .4rem;
+        color: #999;
+        line-height: .4rem;
+        font-size: .16rem;
+        text-align: center;
+        margin-top: .07rem;
+        margin-bottom: .07rem;
+        border: 1px solid #999;
+        float: left;
+        margin-left: 2.2%;
+    }
+    
+    .pay .type ul .lmxuanzhong {
+        background-image: url('./xuanzhong.png');
+        background-size: .2rem .2rem;
+        background-repeat: no-repeat;
+        background-position: 100% 100%;
+        border-color: #e7384a;
+    }
+    
+    .pay .type ul li input {
+        display: block;
+        position: relative;
+        font-size: .12rem;
+        color: #000;
+        height: .4rem;
+        line-height: normal;
+        line-height: .4rem;
+        text-align: center;
+        border: 0;
+        width: 80%;
+        margin-left: 4%;
+        outline: 0;
+    }
+    
+    .pay .title2 {
+        font-size: .18rem;
+        padding-left: .13rem;
+        height: .4rem;
+        line-height: .4rem;
+        color: #b4b4b4;
+    }
+    
+    .pay-type li {
+        height: .51rem;
+        line-height: .5rem;
+        background-color: #fff;
+        display: block;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        font-size: 0.16rem;
+        border-bottom: 1px solid #f5f5f5;
+    }
+    
+    .pay-type span {
+        display: block;
+        display: inline-block;
+        width: .51rem;
+        height: .5rem;
+        background-size: .3rem .3rem;
+        background-position: 50%;
+        background-repeat: no-repeat;
+    }
+    
+    .pay-type .bank span {
+        background-image: url(./yhk.png);
+    }
+    
+    .pay-type .weixin span {
+        background-image: url(./wx.png);
+    }
+    
+    .pay-type .zhifubao span {
+        background-image: url(./zfb.png);
+    }
+    
+    .pay-type p {
+        display: block;
+        flex: 1;
+    }
+    
+    .pay-type li.choise i {
+        float: right;
+        display: block;
+        display: inline-block;
+        width: .3rem;
+        height: .51rem;
+        margin-right: .05rem;
+        background: url(./gx.png) no-repeat left center;
+        background-size: 80% 50%;
+    }
+    
+    .Popup {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 12;
+    }
+    
+    .Popup > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        width: 1rem;
+        height: 0.5rem;
+        line-height: 0.5rem;
+        text-align: center;
+        font-size: 0.14rem;
+        background-color: #e7384a;
+        color: #fff;
+        border-radius: 5px;
+    }
+    
+    .guidPageIos {
+        display: none;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: url("ios.jpg") no-repeat center;
+        background-size: 100% 100%;
+        z-index: 11;
+    }
+    
+    .guidPageAndroid {
+        display: none;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: url("Android.jpg") no-repeat center;
+        background-size: 100% 100%;
+        z-index: 11;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="pay">
+        <div class="pay-title">
+            <div class="back"></div>
+            <div class="name">充值</div>
+            <div class="zw"></div>
+        </div>
+        <div class="pay-content">
+            <div class="user">
+                <div class="account">
+                    <span>账户</span>
+                    <span class="account-name">hhly</span>
+                </div>
+                <div class="balance">
+                    <span>余额</span>
+                    <span class="balance-money"><i class="balance-img"></i> <span class="over">132132</span></span>
+                </div>
+            </div>
+            <div class="pay-amount">充值金额</div>
+            <div class="type">
+                <ul>
+                    <li class="lmxuanzhong" onclick="seleMoney(20)">20元</li>
+                    <li onclick="seleMoney(50)">50元</li>
+                    <li onclick="seleMoney(100)">100元</li>
+                    <li onclick="seleMoney(200)">200元</li>
+                    <li onclick="seleMoney(300)">300元</li>
+                    <li>
+                        <input type="number" placeholder="其他整数金额" id="money-input" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" pattern="[0-9]*" onclick="seleMoney(0)">
+                    </li>
+                </ul>
+            </div>
+            <div class="title2">支付方式</div>
+            <ul class="pay-type">
+                <li class="bank choise" onclick="seleType(3)">
+                    <span></span>
+                    <p>银行卡支付</p>
+                    <i></i>
+                </li>
+                <li class="weixin" onclick="seleType(2)">
+                    <span></span>
+                    <p>微信支付</p>
+                    <i></i>
+                </li>
+                <li class="zhifubao" onclick="seleType(1)">
+                    <span></span>
+                    <p>支付宝支付</p>
+                    <i></i>
+                </li>
+            </ul>
+        </div>
+        <div class="buttom">确认支付</div>
+        <div class="Popup">
+            <div>请输入金额</div>
+        </div>
+        <div class="guidPageIos"></div>
+        <div class="guidPageAndroid"></div>
+    </div>
+</body>
+<script type="text/javascript">
+var ua = window.navigator.userAgent.toLowerCase();
+if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+        $(".pay-type .weixin").hide();
+    }
+}
+
+var Requres = new UrlSearch();
+var Url = "http://mgame.1332255.com"; //http://m.game.13322.com
+var domain = "1332255.com"; //13322.com
+var GamingPayId = "10092"; //电竞充值id 10040
+var GamingId = "10110"; //电竞Id 10100
+var guessingId = "10449"; //体育竞猜id 10342
+var wxGoodsId = "294"; //70         
+var rUrl = Url + '/par';
+var token = Request.token;
+var payBankType=1;
+var to; //0充值到游戏，1充值乐盈币
+var extra; //透传参数
+var gameName;
+var goodsName;
+var pid;
+var rUrlContent;
+var uid;
+var uId;
+
+
+
+var userId = Request.userId || '';
+var lyb = Request.lyb || '';
+var pId = 31111; //应用id
+var pName = '玩一下'; //应用名称
+var pro = '乐盈币充值'; //商品描述
+var sId; //服id
+var paltId = 11111;
+var source = 4;
+var WxgoodsId = '294';
+
+
+var money = 20;
+var tm = 20;
+var pt = 3;
+
+
+$.ajax({
+    type: 'GET',
+    url: "/api/login/tokenLogin",
+    async: false,
+    data: {
+        country: 0,
+        platformTerminal: 4,
+        token: token
+    },
+    success: function(data) {
+        console.log(data);
+    }
+});
+
+
+function seleMoney(num1) {
+    money = num1;
+    if (money == 0) {
+        tm = $('#money-input').val() || 0;
+    } else {
+        tm = money;
+    }
+}
+$('#money-input').on('input', function() {
+    tm = $('#money-input').val() || 0;
+});
+
+function seleType(num2) {
+    pt = num2;
+}
+
+
+$('.type ul li').on('click', function() {
+    $(this).addClass('lmxuanzhong').siblings().removeClass('lmxuanzhong');
+});
+$('.pay-type li').on('click', function() {
+    $(this).addClass('choise').siblings().removeClass('choise');
+});
+
+$('.guidPageIos').on('click', function() {
+    $(this).css('display', 'none');
+});
+$('.guidPageAndroid').on('click', function() {
+    $(this).css('display', 'none');
+});
+$(".back").on("click", function() {
+    window.location.href = rUrl;
+})
+
+$('.account-name').html(userId);
+$('.over').html(lyb);
+
+
+
+
+
+
+
+if (Requres.gid == this.GamingPayId) {
+    sessionStorage.setItem("GamingPayId", "1")
+}
+if (Requres.rUrl != null && Requres.rUrl.toString().length > 1) {
+    payBankType = 3;
+    sessionStorage.setItem("formGame", "1")
+    to = 0;
+    extra = JSON.stringify({
+        "pId": Requres.gid,
+        "uid": Requres.uid,
+        "ext": Requres.ext ? Requres.ext : "",
+        "money": Requres.money,
+        "callbackUrl": Requres.callbackUrl ? Requres.callbackUrl : ""
+    })
+    var gameNameNone = true;
+    gameName = decodeURI(decodeURI(Requres.gname));
+    goodsName = encodeURI(Requres.product);
+    pid = Requres.gid;
+    rUrlContent = decodeURIComponent(Requres.rUrl);
+    $('.balance').html('游戏名');
+    $('.balance-money').html(gameName);
+
+    if (Requres.osType == "app") {
+        $(".pay .title").hide();
+        $(".pay .content").css("top", "0")
+    }
+    uId = Requres.uid;
+    var UA = navigator.userAgent;
+    var forIOS = function() {
+        if (!UA.match(/iPad/) && !UA.match(/iPhone/) && !UA.match(/iPod/)) {
+            return;
+        }
+        if ($('#wrapper').length) {
+            return;
+        }
+        $('body').children().not('script').wrapAll('<div id="wrapper" style="height: 100%"></div>');
+    }();
+    if (Requres.money != null) {
+        $("#money-input").attr("readonly", "readonly");
+        // this.rUrl=false
+        // 游戏方跳过来价格已固定
+        $('.type ul li').unbind();
+
+        if (Requres.money == 20) {
+            $('.type ul li').eq(0).addClass('lmxuanzhong');
+        } else if (Requres.money == 50) {
+            $('.type ul li').eq(1).addClass('lmxuanzhong');
+        } else if (Requres.money == 100) {
+            $('.type ul li').eq(2).addClass('lmxuanzhong');
+        } else if (Requres.money == 200) {
+            $('.type ul li').eq(3).addClass('lmxuanzhong');
+        } else if (Requres.money == 300) {
+            $('.type ul li').eq(4).addClass('lmxuanzhong');
+        } else {
+            $('.type ul li').eq(5).addClass('lmxuanzhong');
+            goodsName = "乐盈币充值";
+            $('#money-input').val(Requres.money);
+        }
+        tm = Requres.money;
+    } else {
+        if (Requres.gid == guessingId) {
+            pid = Requres.gid;
+            gameName = "体育竞猜";
+            $('.balance-money').html(gameName);
+
+            if (!uId) {
+                // this.$http.post("/api/user/getUserInfo", {country: 0, terminal: 4}, {emulateJSON: true}).then((response) => {
+                //   response = response.body;
+                //   if(response.result==0){
+                //     this.uId=response.user.userId;
+                //   }
+                // })
+                $.ajax({
+                    type: 'GET',
+                    url: "/api/user/getUserInfo",
+                    async: false,
+                    data: {
+                        country: 0,
+                        platformTerminal: 4
+                    },
+                    success: function(data) {
+                        uId = data.user.userId;
+                    }
+                });
+            }
+            rUrlContent = Url + "/games/" + Requres.gid;
+        }
+    }
+} else if (Requres.out_id != null && Requres.no != null) {
+    paltId = 4177;
+    payBankType = 3
+    sessionStorage.setItem("formGame", "1")
+    gameNameNone = true;
+    $('.balance').html('游戏名');
+    $('.balance-money').html(gameName);
+    to = 0;
+    source = "4177";
+    $("#money-input").attr("readonly", "readonly");
+    // this.rUrl=false
+    // 游戏方跳过来价格已固定
+    $('.type ul li').unbind();
+
+    // if(Requres.money==20){
+    //   $('.type ul li').eq(0).addClass('lmxuanzhong');
+    // }else if(Requres.money==50){
+    //   $('.type ul li').eq(1).addClass('lmxuanzhong');
+    // }else if(Requres.money==100){
+    //   $('.type ul li').eq(2).addClass('lmxuanzhong');
+    // }else if(Requres.money==200){
+    //   $('.type ul li').eq(3).addClass('lmxuanzhong');
+    // }else if(Requres.money==300){
+    //   $('.type ul li').eq(4).addClass('lmxuanzhong');
+    // }else {
+    //   $('.type ul li').eq(5).addClass('lmxuanzhong');
+    //   goodsName="乐盈币充值";
+    //   $('#money-input').val(Requres.money);
+    // }
+    extra = JSON.stringify({
+        "pId": Requres.game_id,
+        "out_id": Requres.out_id,
+        "game_id": Requres.game_id,
+        "no": Requres.no,
+        "ext": Requres.ext,
+        "total_fee": Requres.total_fee,
+        "callbackUrl": Requres.callbackUrl ? Requres.callbackUrl : ""
+    })
+    var id = "4" + Requres.game_id;
+    goodsName = encodeURI(Requres.goods_name);
+    pid = Requres.game_id;
+    uId = Requres.out_id;
+    rUrlContent = Url + "/games/" + Requres.game_id;
+
+    $.ajax({
+        type: 'GET',
+        url: "/api/index/getGameById",
+        async: false,
+        data: {
+            country: 0,
+            platformId: id
+        },
+        success: function(data) {
+            gameName = data.data.name;
+            $('.balance-money').html(gameName);
+        }
+    });
+    // this.$http.post('/api/index/getGameById',{country:0,platformId:id},{emulateJSON:true}).then(function(res) {
+    //   this.gameName=res.body.data.name;
+    // });
+
+    if (Requres.total_fee / 10 == 20) {
+        $('.type ul li').eq(0).addClass('lmxuanzhong');
+    } else if (Requres.total_fee / 10 == 50) {
+        $('.type ul li').eq(1).addClass('lmxuanzhong');
+    } else if (Requres.total_fee / 10 == 100) {
+        $('.type ul li').eq(2).addClass('lmxuanzhong');
+    } else if (Requres.total_fee / 10 == 200) {
+        $('.type ul li').eq(3).addClass('lmxuanzhong');
+    } else if (Requres.total_fee / 10 == 300) {
+        $('.type ul li').eq(4).addClass('lmxuanzhong');
+    } else {
+        $('.type ul li').eq(5).addClass('lmxuanzhong');
+        // goodsName="乐盈币充值";
+        $('#money-input').val(Requres.total_fee / 10);
+    }
+    tm = Requres.total_fee / 10;
+    // if(Requres.total_fee==200||Requres.total_fee==500||Requres.total_fee==1000||Requres.total_fee==2000||Requres.total_fee==3000){
+    //   this.payxz=Requres.total_fee/10;
+    // }else{
+    //   this.payxz=6;
+    //   this.moneyinput=Requres.total_fee/10;
+    // }
+} else {
+    to = 1;
+    if (Requres.userId) {
+        uId = Requres.userId;
+        lyb = Requres.lyb;
+        // this.$http.post("/api/login/tokenLogin", {country: 0, token: Requres.token}, {emulateJSON: true}).then((response) => {
+        // })
+
+        $.ajax({
+            type: 'GET',
+            url: "/api/login/tokenLogin",
+            async: false,
+            data: {
+                country: 0,
+                platformTerminal: 4,
+                token: Requres.token
+            },
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    } else {
+
+    }
+
+    if (pt == 3) {
+        pid = 31111;
+    } else {
+        pid = 11111;
+    }
+    gameName = "玩一下";
+    goodsName = "乐盈币充值";
+    extra = "";
+    rUrlContent = this.Url + "/par";
+}
+
+
+
+
+
+// 支付绑定
+$('.buttom').on('click', function() {
+    if (money == 0) {
+        tm = $('#money-input').val() || 0;
+    } else {
+        tm = money;
+    }
+    if (tm == 0) {
+        $('.Popup').css('display', 'block');
+        setTimeout(function() {
+            $('.Popup').css('display', 'none');
+        }, 1000)
+        return;
+    }
+    if (pt == 3) {
+        sessionStorage.setItem("payMomey", '0.1');
+        sessionStorage.setItem("bankPid", 31111);
+        sessionStorage.setItem('bankGameName', pName);
+        sessionStorage.setItem('bankTo', to);
+        sessionStorage.setItem("busyId", userId);
+        sessionStorage.setItem('bankExtra', userId + "|" + payBankType + "|" + pId + "|4|" + paltId + "|null|" + (extra ? extra : "null"));
+        sessionStorage.setItem('bankreturnUrl', rUrl);
+        sessionStorage.removeItem("bankName");
+        sessionStorage.removeItem("banknum");
+        // this.$router.push({path:'/backCardPay'})
+        // debugger
+        window.location.href = url + '/backCardPay';
+    } else if (pt == 1) {
+
+        var ua = window.navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+            if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+                $('.guidPageIos').css('display', 'block');
+            } else if (/(Android)/i.test(navigator.userAgent)) {
+                $('.guidPageAndroid').css('display', 'block');
+            }
+            return false;
+        }
+
+        $.ajax({
+            type: 'GET',
+            url: "/api/pay/pay",
+            data: {
+                'money': tm,
+                'type': pt,
+                'game': pId,
+                'gameName': pName,
+                'to': to,
+                'service': "1",
+                'account': userId,
+                'source': source,
+                'sonPlatformId': sId,
+                'extra': extra,
+                'returnUrl': rUrl
+            },
+            dataType: 'jsonp',
+            timeout: 1000,
+            success: function(data) {
+                sessionStorage.removeItem("formGame");
+                var pElement = document.createElement("div");
+                pElement.innerHTML = data.data;
+                document.body.appendChild(pElement);
+                document.forms[0].submit();
+                pElement.remove();
+            },
+            error: function(xhr, type) {
+                return "error";
+            }
+        });
+    } else if (pt == 2) {
+        $.ajax({
+            type: 'GET',
+            url: "/api/pay/pay",
+            data: {
+                'money': '0.1',
+                'type': pt,
+                'game': pId,
+                "goodsId": WxgoodsId,
+                'gameName': pName,
+                'to': to,
+                'service': "1",
+                'account': userId,
+                'sonPlatformId': sId,
+                'extra': extra,
+                'returnUrl': rUrl,
+                "wechatPayType": 2,
+                'source': source
+            },
+            dataType: 'jsonp',
+            timeout: 1000,
+            success: function(data) {
+                sessionStorage.removeItem("formGame");
+                top.location.href = "https://payh5.bbnpay.com/browserh5/paymobile.php?" + data.data;
+            },
+            error: function(xhr, type) {
+                return "error";
+            }
+        });
+    }
+
+});
+</script>
+
+</html>

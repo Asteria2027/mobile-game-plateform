@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="玩一下是专业网页游戏联运平台，主要提供精品网页游戏的运营和推广，玩一下立足玩家需求，为中国游戏玩家提供最全、最酷、最热门的精品游戏，致力于做玩家最爱、最信任的游戏平台，玩家可赚取积分换礼品，注册成为新用户更有丰富豪礼相送!" />
+    <meta name="keywords" content="玩一下,热门游戏,网页游戏大全" />
+    <title>支付</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maxinum-scale=1.0,mininum-scale=1.0,user-scalable=no">
+    <script src="reset.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../lib/swiper/swiper-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../lib/jquery/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="../css/swiper-3.4.0.min.css" />
+    <link rel="stylesheet" type="text/css" href="car.css" />
+    <link rel="stylesheet" type="text/css" href="reset.css" />
+</head>
+<style type="text/css">
+	.showResult {
+		background-color: #f5f5f5;
+	}
+	.showResult .title {
+	    position: relative;
+	    height: 0.45rem;
+	    width: 100%;
+	    line-height: 0.45rem;
+	    text-align: center;
+	    color: #fff;
+	    background-color: #e7374b;
+	    display: block;
+	    display: -webkit-box;
+	    display: -ms-flexbox;
+	    display: flex;
+	}
+	.showResult .title .bac {
+		height: 0.45rem;
+	    width: 0.45rem;
+	    line-height: 0.45rem;
+	    display: inline-block;
+	    text-align: center;
+	    color: #fff;
+	    font-size: 0.24rem;
+	    background-image: url(./back.png);
+	    background-size: 0.3rem 0.3rem;
+	    background-position: center;
+	    background-repeat: no-repeat;
+	}
+	.showResult .title .name {
+	    display: block;
+	    height: 0.45rem;
+	    line-height: 0.45rem;
+	    text-align: center;
+	    color: #fff;
+	    font-size: 0.2rem;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	    -webkit-box-flex: 2;
+	    -ms-flex: 2;
+	    flex: 2;
+	}
+	.showResult .zw {
+		display: inline-block;
+	    height: 0.45rem;
+	    width: 0.45rem;
+	}
+	.showResult .show-content {
+		background-color: #fff;
+
+	}
+	.showResult .show-content li {
+		padding: 0 0.15rem;
+		height: 0.45rem;
+		line-height: 0.45rem;
+		border-bottom: 1px solid #f5f5f5;
+		font-size: 0.14rem;
+		display: block;
+		display: flex;
+	}
+	.showResult .show-content li span:nth-child(2){
+		display: block;
+		flex: 1;
+		text-align: right;
+		font-size: 0.14rem;
+    	color: #999;
+    	overflow: hidden;
+    	text-overflow: ellipsis;
+    	white-space: nowrap;
+    	padding-left: 0.2rem;
+	}
+	.showResult .type {
+		height: 0.45rem;
+		line-height: 0.45rem;
+		padding-left: 0.15rem;
+		font-size: 0.18rem;
+    	color: #999;
+	}
+	.showResult .show-pay-type {
+		background-color: #fff;
+	}
+	.showResult .show-pay-type li {
+		padding: 0 0.15rem;
+		height: 0.45rem;
+		line-height: 0.45rem;
+		border-bottom: 1px solid #f5f5f5;
+		font-size: 0.14rem;
+		display: block;
+		display: flex;
+	}
+	.showResult .show-pay-type li:nth-child(1) span:nth-child(1) {
+		display: block;
+		flex:0 0 0.3rem;
+		height: 0.45rem;
+		background:url('wx.png') no-repeat left center / 80%;
+	}
+	.showResult .show-pay-type li:nth-child(2) span:nth-child(1) {
+		display: block;
+		flex:0 0 0.3rem;
+		height: 0.45rem;
+		background:url('zfb.png') no-repeat left center / 80%;
+	}
+	.showResult .show-pay-type li span:nth-child(2) {
+		display: block;
+		flex: 1;
+	}
+	.showResult .sele span:nth-child(3) {
+		display: block;
+		flex:0 0 0.3rem;
+		height: 0.45rem;
+		background:url('gx.png') no-repeat left center / 80%;
+	}
+	.showResult .paySub {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		height: 0.5rem;
+		width: 100%;
+		line-height: 0.5rem;
+		text-align: center;
+		color: #fff;
+		background-color: #e7384a;
+		font-size: 0.18rem;
+	}
+</style>
+
+<body>
+    <div class="showResult">
+    	<div class="title">
+		    <span class="bac icon-back"></span>
+		    <span class="name">支付</span>
+		    <span class="zw"></span>
+	    </div>
+	    <div class="content">
+	    	<ul class="show-content">
+	    		<li>
+	    			<span>账号:</span>
+	    			<span class="userId">45151</span>
+	    		</li>
+	    		<li>
+	    			<span>商品名称:</span>
+	    			<span class="goosName">5416516</span>
+	    		</li>
+	    		<li>
+	    			<span>订单号:</span>
+	    			<span class="goosNum">54165144444444444444444444446</span>
+	    		</li>
+	    		<li>
+	    			<span>商品金额:</span>
+	    			<span class="goosPrice">12元</span>
+	    		</li>
+	    	</ul>
+	    	<div class="type">支付方式</div>
+	    	<ul class="show-pay-type">
+	    		<li class="weixin sele">
+	    			<span></span>
+	    			<span>微信支付</span>
+	    			<span></span>
+	    		</li>
+	    		<li class="zhifubao">
+	    			<span></span>
+	    			<span>支付宝支付</span>
+	    			<span></span>
+	    		</li>
+	    	</ul>
+
+	    </div>
+	    <div class="paySub">确认支付</div>
+    </div>
+
+</body>
+<script type="text/javascript">
+	$('.bac').on('click',function(){
+		window.history.back();
+	});
+	var Requres = new UrlSearch();
+	var orderNum = sessionStorage.getItem('orderNum')||'';
+	var goodsName = sessionStorage.getItem('goodsName')||'';
+	var goodsPrice = sessionStorage.getItem('goodsPrice')||'';
+	var phone = sessionStorage.getItem('phone')||'';
+	var qq = sessionStorage.getItem('qq')||'';
+	var addressId = sessionStorage.getItem('addressId')||'';
+
+
+	var userId = Requres.userId||'';
+	var goodsId = Requres.goodsId||'';
+	var pt = 2;
+	var rUrl = 'http://m.game.13322.com/car/showPayResult.html';
+	var url = '/api/pay/pay';
+
+	$('.userId').html(userId);
+	$('.goosName').html(goodsName);
+	$('.goosNum').html(orderNum);
+	$('.goosPrice').html(goodsPrice+'元');
+
+	$('.show-pay-type li').on('click',function(){
+		$(this).addClass('sele').siblings().removeClass('sele');
+		if($(this).hasClass('weixin')){
+			pt = 2;
+		}else if($(this).hasClass('zhifubao')){
+			pt = 1;
+		}
+	});
+
+	$('.paySub').on('click',function(){
+		if(pt==1){
+
+		// var ua = window.navigator.userAgent.toLowerCase();
+  //     	if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+	 //        if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)){
+	 //          this.showIos = true;
+	 //          this.showAndroid = false
+	 //        }else if(/(Android)/i.test(navigator.userAgent)){
+	 //          this.showIos = false;
+	 //          this.showAndroid = true;
+	 //        }
+	 //        return false
+  //     	}
+
+			$.ajax({
+				type:'GET',
+				url: url,
+				data:{
+					'money' : goodsPrice,
+	                'type' : pt,
+	                'game' : 31111,
+	                'gameName' : "玩一下",
+	                "to":2,
+	                'service' : "1",
+	                'account' : userId,
+	                'extra' : "",
+	                'returnUrl' : rUrl,
+	                "phone":phone,
+	                'count':1,
+	                'addressId':addressId,
+	                "payToAccount":qq,
+	                "productId":goodsId
+				},
+				dataType:'jsonp',
+				timeout : 1000,
+				success:function(data) {
+					console.log(data);
+					if(data.result==0&&data.data.indexOf("result")==-1){
+
+						sessionStorage.setItem('ordernum1',data.businessNo);
+
+						var pElement = document.createElement("div");
+						pElement.innerHTML = data.data;
+						document.body.appendChild(pElement);
+						document.forms[0].submit();
+						pElement.remove();
+					}else {
+						sessionStorage.setItem("showFaile",JSON.parse(data.data).msg)
+                  		window.location.href = "showPayResult.html";
+					}
+
+				},
+				error:function() {
+					return "error";
+				}
+			});
+		}else if(pt==2){
+			$.ajax({
+				type:'GET',
+				url: url,
+				data:{
+					'money' : goodsPrice,
+	                'type' : pt,
+	                'game' : 31111,
+	                'gameName' : "玩一下",
+	                "to":2,
+	                'service' : "1",
+	                'account' : userId,
+	                'extra' : "",
+	                'returnUrl' : rUrl,
+	                "phone":phone,
+	                "wechatPayType":2,
+	                'count':1,
+	                'addressId':addressId,
+	                "payToAccount":qq,
+	                "productId":goodsId,
+	                "goodsId":294//线上70
+				},
+				dataType:'jsonp',
+				timeout : 1000,
+				success:function(data) {
+					console.log(data);
+					if(data.result==0&&data.data.indexOf("result")==-1){
+						// sessionStorage.removeItem('goodsName');
+						// sessionStorage.removeItem('goodsPrice');
+						// sessionStorage.removeItem('phone');
+						// sessionStorage.removeItem('addressId');
+						sessionStorage.setItem('ordernum1',data.businessNo);
+
+						top.location.href="https://payh5.bbnpay.com/browserh5/paymobile.php?"+data.data;
+					}else {
+						sessionStorage.setItem("showFaile",JSON.parse(data.data).msg)
+                  		window.location.href = "showPayResult.html";
+					}
+
+				},
+				error:function() {
+					return "error"
+				}
+			});
+		}
+	});
+
+</script>
+
+</html>

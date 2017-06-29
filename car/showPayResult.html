@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="玩一下是专业网页游戏联运平台，主要提供精品网页游戏的运营和推广，玩一下立足玩家需求，为中国游戏玩家提供最全、最酷、最热门的精品游戏，致力于做玩家最爱、最信任的游戏平台，玩家可赚取积分换礼品，注册成为新用户更有丰富豪礼相送!"/>
+		<meta name="keywords" content="玩一下,热门游戏,网页游戏大全"/>
+		<title>支付</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maxinum-scale=1.0,mininum-scale=1.0,user-scalable=no">
+		<script src="reset.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../lib/swiper/swiper-3.4.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../lib/jquery/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/swiper-3.4.0.min.css"/>
+		<link rel="stylesheet" type="text/css" href="car.css"/>
+		<link rel="stylesheet" type="text/css" href="reset.css"/>
+	</head>
+	<style type="text/css">
+		.showPayResult {
+        width: 100%;
+        overflow: hidden;
+        font-family: helvetica;
+        font-size: 0.16rem;
+    	}
+
+	    .showPayResult .title {
+	        position: relative;
+	        height: 0.45rem;
+	        line-height: 0.45rem;
+	        width: 100%;
+	        text-align: center;
+	        background: #e7384a;
+	        font-size: 0.25rem;
+	        color: #fff;
+	    }
+
+	    .showPayResult .iconBack {
+	        position: absolute;
+	        top: 0;
+	        left: 0.05rem;
+	        width: 0.25rem;
+	        height: 100%;
+	        background: url("../images/exchange/return.png") no-repeat center left;
+	    }
+	    .showPayResult .show-content {
+		background-color: #fff;
+
+		}
+		.showPayResult .show-content li {
+			padding: 0 0.15rem;
+			height: 0.45rem;
+			line-height: 0.45rem;
+			border-bottom: 1px solid #f5f5f5;
+			font-size: 0.14rem;
+			display: block;
+			display: flex;
+		}
+		.showPayResult .show-content li span:nth-child(2){
+			display: block;
+			flex: 1;
+			text-align: right;
+			font-size: 0.14rem;
+	    	color: #999;
+		}
+		.showPayResult .show-content>div {
+			width: 100%;
+			height: 2.2rem;
+			overflow: hidden;
+			border-bottom: 1px solid #f5f5f5;
+		}
+		.showPayResult .show-content>div>img {
+			display: block;
+			margin: 0 auto ;
+			height: 1.5rem;
+			width: 1.5rem;
+		}
+		.showPayResult .show-content>div>p {
+			text-align: center;
+			line-height: 0.3rem;
+			display: block;
+			color: #00e80b;
+		}
+		.showPayResult .show-content>div>p:nth-child(3) {
+			padding-bottom: 0.2rem;
+
+			font-size: 0.14rem;
+		}
+		.showPayResult .rego {
+			display: block;
+			display: flex;
+			height: .5rem;
+		    line-height: .5rem;
+		    width: 100%;
+		    position: fixed;
+			left: 0;
+			bottom: 0;
+			background-color: #e7384a;
+		}
+		.showPayResult .rego span {
+			display: block;
+			flex: 1;
+			text-align: center;
+			font-size: 0.18rem;
+			color: #fff;
+		}
+	</style>
+	<body>
+		<div class="showPayResult">
+			<div class="title">
+	            <i class="iconBack"></i>
+	            <h3>支付</h3>
+        	</div>
+        	<div class="content">
+	    	<ul class="show-content">
+	    		<div>
+	    			<img>
+	    			<p></p>
+	    			<p></p>
+	    		</div>
+	    		<li>
+	    			<span>账号:</span>
+	    			<span class="userId"></span>
+	    		</li>
+	    		<li>
+	    			<span>充值订单号:</span>
+	    			<span class="goosNum"></span>
+	    		</li>
+	    		<li>
+	    			<span>商品金额:</span>
+	    			<span class="goosPrice"></span>
+	    		</li>
+	    		<li>
+	    			<span>商品名称:</span>
+	    			<span class="goosName"></span>
+	    		</li>
+	    	</ul>
+	    	<div class="rego">
+	    		<span></span>
+	    		<span></span>
+	    	</div>
+	    </div>
+    	</div>
+	</body>
+	<script type="text/javascript">
+
+		var orderNum = sessionStorage.getItem('orderNum')||'';
+		var orderNum1 = sessionStorage.getItem('ordernum1')||'';
+		var goodsName = sessionStorage.getItem('goodsName')||'';
+		var goodsPrice = sessionStorage.getItem('goodsPrice')||'';
+		var userId = sessionStorage.getItem('13322userId')||'';
+		$('.userId').html(userId);
+		$('.goosNum').html(orderNum);
+		$('.goosPrice').html(goodsPrice+'元');
+		$('.goosName').html(goodsName);
+		$('.iconBack').on('click',function(){
+			window.location.href = 'car.html';
+		});
+		$.ajax({
+			type:'GET',
+			url:'/api/pay/queryPay',
+			data:{
+				country:0,
+				businessNo:orderNum1,
+				platformTerminal:4
+			},
+			success:function(data){
+				console.log(data);
+				if(data.result==0){
+					$('.show-content>div>img').attr('src','paysuccess.png');
+					$('.show-content>div>p').eq(0).html('购买成功');
+					$('.rego>span').eq(0).html('返回首页');
+					$('.rego>span').eq(1).html('再充一笔');
+					$('.rego>span').eq(0).on('click',function(){
+						window.location.href = sessionStorage.getItem("url");
+					});
+					$('.rego>span').eq(1).on('click',function(){
+						window.location.href = 'car.html';
+					});
+				}else {
+					var cases = sessionStorage.getItem("showFaile")||data.msg;
+					$('.show-content>div>img').attr('src','payfail.png');
+					$('.show-content>div>p').eq(0).html('购买失败');
+					$('.show-content>div>p').eq(1).html('原因：'+cases);
+					$('.show-content>div>p').css({
+						color: '#e7384a'
+					});;
+					$('.rego>span').eq(0).html('联系客服');
+					$('.rego>span').eq(1).html('继续购买');
+					$('.rego>span').eq(0).on('click',function(){
+						window.location.href="http://71chat.com/scsf/phone/visitor.html?cmpcd=178019";
+					});
+					$('.rego>span').eq(1).on('click',function(){
+						window.location.href = 'car.html';
+					});
+				}
+			},
+			error:function(){
+				return 'error';
+			}
+		})
+	</script>
+</html>

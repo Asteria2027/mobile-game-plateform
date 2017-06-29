@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="玩一下是专业网页游戏联运平台，主要提供精品网页游戏的运营和推广，玩一下立足玩家需求，为中国游戏玩家提供最全、最酷、最热门的精品游戏，致力于做玩家最爱、最信任的游戏平台，玩家可赚取积分换礼品，注册成为新用户更有丰富豪礼相送!"/>
+  <meta name="keywords" content="玩一下,热门游戏,网页游戏大全"/>
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  <base href="/"/>
+  <style>
+    a[title] {
+      display:none
+    }
+    .Load{
+      position: fixed;
+      top: 0rem;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      background-color: #F5F5F5;
+    }
+    .Load #load-faile{
+
+    }
+    .Load>div .Load-iconNone{
+      display: none !important;
+    }
+    .Load>div{
+       position: absolute;
+       top: 30%;
+       left: 0;
+       right: 0;
+       width: 1.39rem;
+       height: 0.92rem;
+       margin: auto;
+       display: block;
+       display: flex;
+    }
+    .Load>div>span:nth-of-type(2){
+       display: block;
+       flex: 1;
+       height: 100%;
+       background-image: url("./static/images/loading.png");
+       background-size: 1.09rem 0.92rem;
+       background-position: center;
+       background-repeat: no-repeat;
+     }
+    .Load>div>span:nth-of-type(3){
+       display: none;
+       flex: 1;
+       height: 100%;
+       background-image: url("./static/images/loadingfinsh.png");
+       background-size: 1.4rem 0.92rem;
+       background-position: center;
+       background-repeat: no-repeat;
+     }
+    .Load>div .Load-icon{
+      margin-top: 0.72rem;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+    }
+    .Load>div .Load-icon:before {
+      display: block;
+      content:"";
+      width: 0.2rem;
+      height: 0.2rem;
+      background-image: url("./static/images/loading.acd260c1.png");
+      animation:loading .8s linear infinite;
+      -webkit-animation:loading .8s linear infinite;
+      background-size: 0.2rem 0.2rem;
+    }
+    .Load>div .Load-icon:after {
+      content:"";
+      transform:translate(-44%,-50%);
+      -ms-transform:translate(-44%,-50%);
+      -webkit-transform:translate(-44%,-50%);
+      -moz-transform:translate(-44%,-50%);
+      -o-transform:translate(-44%,-50%);
+      color:#1581cc;
+      font-size:14px
+    }
+    @keyframes loading {
+      0% {
+        transform:rotate(0);
+        -webkit-transform:rotate(0)
+      }
+      100% {
+        transform:rotate(360deg);
+        -webkit-transform:rotate(360deg)
+      }
+    }@-webkit-keyframes loading {
+       0% {
+         transform: rotate(0);
+         -webkit-transform: rotate(0)
+       }
+       100% {
+         transform: rotate(360deg);
+         -webkit-transform: rotate(360deg)
+       }
+     }
+  </style>
+  <title>玩一下-最热门网页游戏集合-网页游戏大全</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maxinum-scale=1.0,mininum-scale=1.0,user-scalable=no">
+  <link rel="shortcut icon" href="64X64.ico">
+  <script>
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+      window.onload=function () {
+        document.addEventListener('touchstart',function (event) {
+          if(event.touches.length>1){
+            event.preventDefault();
+          }
+        })
+        var lastTouchEnd=0;
+        document.addEventListener('touchend',function (event) {
+          var now=(new Date()).getTime();
+          if(now-lastTouchEnd<=500){
+            event.preventDefault();
+          }
+          lastTouchEnd=now;
+        },false)
+      }
+    }
+  </script>
+  <link rel="stylesheet" type="text/css" href="./static/css/swiper-3.4.0.min.css">
+  <script src="./static/js/zepto.min.js"></script>
+  <script src="./static/js/Md5.js"></script>
+  <script src="./static/js/swiper-3.4.0.min.js"></script>
+  <script src="static/js/zepto.cookie.min.js"></script>
+  <script>
+    !function (N, M) {
+      function L() {
+        var a = I.getBoundingClientRect().width;
+        a / F > 750 && (a = 750 * F);
+        var d = a / 3.75;
+        I.style.fontSize = d + "px", D.rem = N.rem = d
+      }
+      var K, J = N.document, I = J.documentElement, H = J.querySelector('meta[name="viewport"]'), G = J.querySelector('meta[name="flexible"]'), F = 0, E = 0, D = M.flexible || (M.flexible = {});
+      if (H) {
+        var C = H.getAttribute("content").match(/initial\-scale=([\d\.]+)/);
+        C && (E = parseFloat(C[1]), F = parseInt(1 / E))
+      } else {
+        if (G) {
+          var B = G.getAttribute("content");
+          if (B) {
+            var A = B.match(/initial\-dpr=([\d\.]+)/), z = B.match(/maximum\-dpr=([\d\.]+)/);
+            A && (F = parseFloat(A[1]), E = parseFloat((1 / F).toFixed(2))), z && (F = parseFloat(z[1]), E = parseFloat((1 / F).toFixed(2)))
+          }
+        }
+      }
+      if (!F && !E) {
+        var y = N.navigator.userAgent, x = (!!y.match(/android/gi), !!y.match(/iphone/gi)), w = x && !!y.match(/OS 9_3/), v = N.devicePixelRatio;
+        F = x && !w ? v >= 3 && (!F || F >= 3) ? 3 : v >= 2 && (!F || F >= 2) ? 2 : 1 : 1, E = 1 / F
+      }
+      if (I.setAttribute("data-dpr", F), !H) {
+        if (H = J.createElement("meta"), H.setAttribute("name", "viewport"), H.setAttribute("content", "initial-scale=" + E + ", maximum-scale=" + E + ", minimum-scale=" + E + ", user-scalable=no"), I.firstElementChild) {
+          I.firstElementChild.appendChild(H)
+        } else {
+          var u = J.createElement("div");
+          u.appendChild(H), J.write(u.innerHTML)
+        }
+      }
+      N.addEventListener("resize", function () {
+        clearTimeout(K), K = setTimeout(L, 300)
+      }, !1), N.addEventListener("pageshow", function (b) {
+        b.persisted && (clearTimeout(K), K = setTimeout(L, 300))
+      }, !1), "complete" === J.readyState ? J.body.style.fontSize = 12 * F + "px" : J.addEventListener("DOMContentLoaded", function () {
+          J.body.style.fontSize = 12 * F + "px"
+        }, !1), L(), D.dpr = N.dpr = F, D.refreshRem = L, D.rem2px = function (d) {
+        var c = parseFloat(d) * this.rem;
+        return "string" == typeof d && d.match(/rem$/) && (c += "px"), c
+      }, D.px2rem = function (d) {
+        var c = parseFloat(d) / this.rem;
+        return "string" == typeof d && d.match(/px$/) && (c += "rem"), c
+      }
+    }(window, window.lib || (window.lib = {}));
+  </script>
+  <script async="async">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?09e762b112ba655a9d2784e4a51cb0f3";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+  <script type="text/javascript" async="async">
+    /**
+     head标签内增加渠道统计代码
+     通过渠道推广访问一个页面后，再访问其他页面都要加上渠道参数
+     代码安装好后 测试访问地址 http://ck.13322win.com
+     */
+    //   var str = parent.document.getElementById("game_iframe");
+    // console.log(str);
+    function UrlSearch() {
+      var str = window.location.href;
+      var num = str.indexOf("?");
+      str = str.substr(num + 1);
+      if(str.indexOf("?") == -1) {} else {
+        num = str.indexOf("?");
+        str = str.substr(num + 1);
+      }
+      var arr = str.split("&")
+      for(i = 0; i < arr.length; i++) {
+        num = arr[i].indexOf("=");
+        if(num > 0) {
+          name = arr[i].substring(0, num);
+          value = arr[i].substr(num + 1);
+          this[name] = value;
+        }
+      }
+    }
+    function UrlSearchIframeSrc(){
+      var str = '';
+      if(document.getElementById('mainFrame')){
+        str = document.getElementById('mainFrame').src;
+      }
+      var num = str.indexOf("?");
+      str = str.substr(num + 1);
+      if(str.indexOf("?") == -1) {} else {
+        num = str.indexOf("?");
+        str = str.substr(num + 1);
+      }
+      var arr = str.split("&")
+      for(i = 0; i < arr.length; i++) {
+        num = arr[i].indexOf("=");
+        if(num > 0) {
+          name = arr[i].substring(0, num);
+          value = arr[i].substr(num + 1);
+          this[name] = value;
+        }
+      }
+    }
+    (function () {
+      var Requres = new UrlSearch();
+      var RequresIframe = new UrlSearchIframeSrc();
+      var cid;
+      if (window.location.href.indexOf("gamelist")!=-1&&Requres.cid) {
+        var userid =  window.location.href.split("?")[0].split("/")[4];
+        sessionStorage.setItem("gameId",userid);
+        sessionStorage.setItem("gameCid",Requres.cid);
+        sessionStorage.setItem("gameUrl",window.location.href);
+      }else if (Requres.type&&Requres.cid) {
+        sessionStorage.setItem("gameId","");
+        sessionStorage.setItem("gameCid",Requres.cid);
+        sessionStorage.setItem("gameUrl",window.location.href);
+      }else if(!/^[A-z]+$/.test(window.location.href.split(".com/")[1])&&window.location.href.split(".com/")[1].indexOf("/")==-1&&window.location.href.split(".com/")[1]!=""&&window.location.href.split(".com/")[1].indexOf("register")==-1&&window.location.href.split(".com/")[1].indexOf("login")==-1&&window.location.href.split(".com/")[1].indexOf("par")==-1){
+        sessionStorage.setItem("gameId","");
+        sessionStorage.setItem("gameCid",window.location.href.split(".com/")[1]);
+        sessionStorage.setItem("gameUrl",window.location.href);
+      }
+      if(Requres.cid){
+        cid=Requres.cid;
+        sessionStorage.setItem("registerCid",cid)
+      }else if(RequresIframe.cid){
+        cid=RequresIframe.cid;
+        sessionStorage.setItem("registerCid",cid)
+      }else{
+        cid='vnp56ams';
+      }
+      $.ajax({
+        type:"get",
+        url:"http://union.13322.com/traffic/api",
+//					url:"http://192.168.74.163:8343/traffic/api",
+        async:true,
+        data:{
+          "random": new Date().getTime(),
+          "cid_spec": "vnp56ams",
+          "partner" :"PARTNER",
+          "REQTYPE" :1,
+          "url":window.location.href,
+          "CHANNEL":cid,
+          "userid":userid,
+          "referrer":window.sessionStorage.referrer
+        }
+      });
+    })();
+  </script>
+</head>
+<body style="height: 100%">
+<div id="app" style="height: 100%">
+  <app style="height: 100%"></app>
+</div>
+<div class="Load">
+  <div>
+    <span class="Load-icon"></span>
+    <span id="load-success"></span>
+    <span id="load-faile"></span>
+  </div>
+</div>
+<script>
+  var LoadTimer;
+  if(window.location.href.indexOf("/")==-1||window.location.href.indexOf("index")==-1){
+    document.querySelector(".Load").style.display="none";
+  }else{
+    LoadTimer =setTimeout(function () {
+      document.querySelector(".Load-icon").style.display="none";
+      document.querySelector("#load-success").style.display="none";
+      document.querySelector("#load-faile").style.display="block";
+    },5000);
+  }
+</script>
+</body>
+<script src="https://s95.cnzz.com/z_stat.php?id=1261430278&web_id=1261430278" language="JavaScript"></script>
+
+</html>
